@@ -79,7 +79,18 @@ a {
   gap: 2em;
 }
 
+/* Icones  */
+i {
+  cursor: pointer;
+}
 
+i.fa-pencil:hover {
+  color: #4baf3b;
+}
+
+i.fa-trash:hover {
+  color: #b75c1b;
+}
 main {
   width: 80%;
   margin: auto;
@@ -133,7 +144,6 @@ section#home-intro div.intro-img img {
 section#home-intro div.bottom-nav i.fa-angles-down {
   font-size: 4em;
   margin-top: 80px;
-  cursor: pointer;
   animation: heartbeat 1.5s ease-in-out infinite both;
 }
 

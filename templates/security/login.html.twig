@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion
+{% endblock %}
+
+{% block body %}
+
+	<section id="form-page" class="dfull">
+
+		<section id="form-container" class="dfull">
+			<div>
+				<img src="{{ asset('img/form2.jpg')}}" / alt="image">
+			</div>
+
+			<form id="form" class="dfull fdc">
+				<h2>Connexion</h2>
+				<label for="firstname">
+					<input type="text" id="firstname" name="firstname" placeholder="Pseudo" required>
+				</label>
+
+
+				<label for="email">
+					<input type="email" id="email" name="email" placeholder="Adresse email" required>
+				</label>
+
+				<label for="password">
+					<input type="password" id="password" name="password" placeholder="Mot de passe" required>
+				</label>
+
+				<div class="forgot-password">
+					<a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
+				</div>
+
+
+				<button type="submit" class="submit-button">Se connecter</button>
+
+
+				<div class="login-link">
+					<p>Pas encore inscrit ?
+						<a href="login.html">Inscrivez-vous</a>
+					</p>
+				</div>
+			</form>
+		</section>
+
+	</section>
+
+{% endblock %}

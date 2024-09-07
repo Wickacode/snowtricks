@@ -23,4 +23,20 @@ class AuthController extends AbstractController
             'controller_name' => 'AuthController',
         ]);
     }
+
+    #[Route('/login', name: 'app_login')]
+    public function login(): Response
+    {
+        return $this->render('security/login.html.twig', [
+            'controller_name' => 'AuthController',
+        ]);
+    }
+
+    #[Route('/forgotPassword', name: 'app_forgot_password')]
+    public function forgotPassword(): Response
+    {
+        return $this->render('auth/forgot-password.html.twig', [
+            'controller_name' => 'AuthController',
+        ]);
+    }
 }
