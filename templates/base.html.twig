@@ -8,9 +8,8 @@
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 		<link rel="stylesheet" href="{{asset("css/style.css")}}"/> {% block stylesheets %}{% endblock %}
-        <link rel="stylesheet" href="{{asset("css/forms.css")}}"/> {% block form_stylesheets %}{% endblock %}
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+		<link rel="stylesheet" href="{{asset("css/forms.css")}}"/> {% block form_stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 		{% block javascripts %}
 			{% block importmap %}
@@ -21,19 +20,58 @@
 	<body>
 		<header>
 			<nav>
-                <div class="logo">
-                    <img src="{{asset('img/logo.png')}}">
-                </div>
+				<div class="logo">
+					<img src="{{asset('img/logo.png')}}">
+				</div>
 				<ul>
 					<li><a href="{{path('app_home')}}">Accueil</a></li>
-					<li><a href="{{path('app_trick')}}">Figures</a></li>
-                    <li><a href="{{path('app_login')}}">Connexion</a></li>
-                    <li><a href="{{path('app_register')}}">Inscription</a></li>
-                    <li><a href="{{path('app_trick')}}">Contact</a></li>
+					<li><a href="{{path('app_login')}}">Connexion</a></li>
+					<li><a href="{{path('app_register')}}">Inscription</a></li>
+					<li><a href="{{path('app_trick')}}">Contact</a></li>
 				</ul>
 			</nav>
 		</header>
 
 		{% block body %}{% endblock %}
+
+		<footer>
+			<!-- Logo -->
+			<div class="footer-logo">
+				<a href="/">
+					<img src="{{asset('img/logo.png')}}">
+				</a>
+			</div>
+
+			<!-- Liens -->
+			<div class="footer-links">
+				<a href="/">Accueil</a>
+				<a href="/about">Connexion</a>
+				<a href="/services">Inscription</a>
+				<a href="/contact">Contact</a>
+			</div>
+
+			<!-- Réseaux sociaux -->
+			<div class="footer-socials">
+				<a href="https://facebook.com" target="_blank" aria-label="Facebook">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="https://twitter.com" target="_blank" aria-label="Twitter">
+					<i class="fab fa-twitter"></i>
+				</a>
+				<a href="https://instagram.com" target="_blank" aria-label="Instagram">
+					<i class="fab fa-instagram"></i>
+				</a>
+				<a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+					<i class="fab fa-linkedin-in"></i>
+				</a>
+			</div>
+
+			<!-- Mentions légales -->
+			<div class="footer-legal">
+				<p>&copy; 2024 Snowtricks. Tous droits réservés. |
+					<a href="/legal-notice">Mentions légales</a>
+				</p>
+			</div>
+		</footer>
 	</body>
 </html>

@@ -58,3 +58,11 @@ form#form button.submit-button:active {
   background-color: initial;
   color: var(--dark-blue);
 }
+
+/* Responsive  */
+
+@media (max-width: 768px) {
+    section#form-container div img {
+        display: none;
+    }
+}

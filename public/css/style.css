@@ -101,13 +101,13 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 150px;
+  height: 110px;
   padding: 10px 40px;
   background-color: #030303;
 }
 
 nav .logo img {
-  width: 150px;
+  width: 100px;
 }
 
 nav ul {
@@ -122,11 +122,58 @@ nav ul li a {
   
 }
 
+/* Footer  */
+footer {
+  background-color: #030303;
+  padding: 20px;
+  text-align: center;
+  margin-top: 100px;
+}
+
+div.footer-logo img {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+div.footer-links {
+  margin-bottom: 15px;
+}
+
+div.footer-links a {
+  text-decoration: none;
+  color: var(--extra-light-blue);
+  margin: 0 15px;
+}
+
+div.footer-links a:hover {
+  color: white;
+}
+
+div.footer-socials {
+  margin-bottom: 15px;
+}
+
+div.footer-socials a {
+  color: var(--light-blue);
+  margin: 0 10px;
+  font-size: 24px;
+}
+
+div.footer-socials a:hover {
+  color: var(--extra-light-blue);
+}
+
+div.footer-legal {
+  font-size: 14px;
+  color: white;
+}
+
 /* Home Page */
 /* ---- Home Intro ---- */
 section#home-intro {
   width: 80%;
-  height: 80vh;
+  height: 90vh;
   margin: auto;
 }
 
@@ -144,6 +191,7 @@ section#home-intro div.intro-img img {
 section#home-intro div.bottom-nav i.fa-angles-down {
   font-size: 4em;
   margin-top: 80px;
+  color: var(--extra-dark-blue);
   animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
@@ -208,4 +256,5 @@ section#home-tricks-list div.trick div.trick-name {
   text-align: center;
   padding: 40px;
   font-weight: bold;
+  cursor: pointer;
 }
