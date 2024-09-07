@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+		<link rel="stylesheet" href="{{asset("css/style.css")}}"/> {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}
-        <a href="{{ path('createTrick') }}">Créer une figure</a>
-        {% endblock %}
-    </body>
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<nav>
+                <div class="logo">
+                    <img src="{{asset('img/logo.png')}}">
+                </div>
+				<ul>
+					<li><a href="{{path('app_trick')}}">Accueil<i class="fa-solid fa-house"></i></a></li>
+					<li><a href="{{path('app_trick')}}">Figures<i class="fa-solid fa-person-snowboarding"></i></a></li>
+                    <li><a href="{{path('app_trick')}}">Connexion<i class="fa-solid fa-right-to-bracket"></i></a></li>
+                    <li><a href="{{path('app_trick')}}">Inscription<i class="fa-solid fa-address-card"></i></a></li>
+				</ul>
+			</nav>
+		</header>
+
+		{% block body %}{% endblock %}
+	</body>
 </html>

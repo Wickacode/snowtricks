@@ -1,0 +1,149 @@
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Hubballi&display=swap");
+
+/* Colors */
+:root {
+  --extra-dark-blue: #5585b5;
+  --dark-blue: #53a8b6;
+  --light-blue: #79c2d0;
+  --extra-light-blue: #bbe4e9;
+}
+
+/* Général */
+* {
+  font-family: "Hubballi", sans-serif;
+  font-size: 15px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Text */
+h1,
+h2 {
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+p {
+  font-size: 18px;
+}
+
+li {
+  list-style-type: none;
+}
+
+/* Custom style */
+
+.ta {
+  text-align: center;
+}
+
+.dfull {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fdc {
+  flex-direction: column;
+}
+
+.fw {
+  flex-wrap: wrap;
+}
+
+.gap {
+  gap: 2em;
+}
+
+
+main {
+  width: 60%;
+  margin: auto;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 150px;
+  padding: 10px 40px;
+  background-color: #030303;
+}
+
+nav .logo img {
+  width: 150px;
+}
+
+nav ul {
+  display: flex;
+  gap: 2em;
+  text-transform: uppercase;
+  color: var(--extra-light-blue);
+}
+
+nav ul li a {
+  padding-right: 10px;
+  list-style-type: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Home Page */
+/* ---- Home Intro ---- */
+section#home-intro {
+  width: 80%;
+  height: 80vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+section#home-intro div.intro-text {
+  border: 2px solid var(--extra-light-blue);
+  border-radius: 5px;
+  padding: 5em 3em;
+  width: 50%;
+}
+
+section#home-intro div.intro-img img {
+  width: 300px;
+}
+/* ---- Home tricks List ----  */
+section#home-tricks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+section#home-tricks-list .trick {
+  position: relative;
+  width: min-content;
+  border-radius: 5px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+section#home-tricks-list .trick .trick-img img {
+  width: 300px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+}
+
+section#home-tricks-list div.trick div.trick-name {
+  color: var(--extra-dark-blue);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 40px;
+  font-weight: bold;
+}

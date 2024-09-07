@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Snowtricks
+{% endblock %}
+
+{% block body %}
+	<main>
+		<section id="home-intro">
+			<div class="intro-text">
+				<h1>Bienvenue sur mon site!</h1>
+				<p>Je m'appelle Jimmy Sweat, et je suis un passionné de snowboard. Si tu veux découvrir ce sport incroyable, apprendre des figures stylées ou partager tes propres tricks, tu es au bon endroit !
+					<br/>Je te souhaite une excellente expérience sur mon site et j'ai hâte de voir tes contributions prochainement. À très bientôt sur les pistes !</p>
+			</div>
+			<div class="intro-img">
+				<img src="{{ asset('img/Jimmy.png')}}" / alt="image">
+			</div>
+
+		</section>
+
+		<section id="home-tricks-list" class="dfull fdc">
+			<h2>Découvrir quelques tricks</h2>
+
+			<section id="tricks-container" class="dfull fw gap">
+				<div class="trick">
+					<div class="trick-img">
+						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+					</div>
+					<div class="trick-name">
+						<span>Nom du trick</span>
+					</div>
+				</div>
+
+				<div class="trick">
+					<div class="trick-img">
+						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+					</div>
+					<div class="trick-name">
+						<span>Nom du trick</span>
+					</div>
+				</div>
+
+				<div class="trick">
+					<div class="trick-img">
+						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+					</div>
+					<div class="trick-name">
+						<span>Nom du trick</span>
+					</div>
+				</div>
+
+				<div class="trick">
+					<div class="trick-img">
+						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+					</div>
+					<div class="trick-name">
+						<span>Nom du trick</span>
+					</div>
+				</div>
+
+				<div class="trick">
+					<div class="trick-img">
+						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+					</div>
+					<div class="trick-name">
+						<span>Nom du trick</span>
+					</div>
+				</div>
+
+				<div class="trick">
+					<div class="trick-img">
+						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+					</div>
+					<div class="trick-name">
+						<span>Nom du trick</span>
+					</div>
+				</div>
+			</section>
+
+		</section>
+
+	</main>
+	<a href="{{path('app_trick')}}">Test lien</a>
+{% endblock %}
