@@ -40,16 +40,31 @@ li {
   list-style-type: none;
 }
 
+a {
+  list-style-type: none;
+  color: inherit;
+  text-decoration: none;
+}
+
+
 /* Custom style */
 
 .ta {
   text-align: center;
 }
 
+.df {
+  display: flex;
+}
+
 .dfull {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.aic {
+  align-items: center;
 }
 
 .fdc {
@@ -66,7 +81,7 @@ li {
 
 
 main {
-  width: 60%;
+  width: 80%;
   margin: auto;
 }
 
@@ -93,9 +108,7 @@ nav ul {
 
 nav ul li a {
   padding-right: 10px;
-  list-style-type: none;
-  color: inherit;
-  text-decoration: none;
+  
 }
 
 /* Home Page */
@@ -104,9 +117,6 @@ section#home-intro {
   width: 80%;
   height: 80vh;
   margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 section#home-intro div.intro-text {
@@ -118,6 +128,48 @@ section#home-intro div.intro-text {
 
 section#home-intro div.intro-img img {
   width: 300px;
+}
+
+section#home-intro div.bottom-nav i.fa-angles-down {
+  font-size: 4em;
+  margin-top: 80px;
+  cursor: pointer;
+  animation: heartbeat 1.5s ease-in-out infinite both;
+}
+
+@keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-transform-origin: center center;
+            transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  10% {
+    -webkit-transform: scale(0.91);
+            transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  17% {
+    -webkit-transform: scale(0.98);
+            transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  33% {
+    -webkit-transform: scale(0.87);
+            transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  45% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
 }
 /* ---- Home tricks List ----  */
 section#home-tricks-list {
