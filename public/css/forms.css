@@ -3,8 +3,8 @@ section#form-page {
 }
 section#form-container {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: 50%;
-  margin: auto;
+  width: auto;
+  margin: 20px auto;
 }
 
 section#form-container div img {
@@ -15,7 +15,7 @@ section#form-container div img {
 }
 
 section#form-container form#form {
-  width: 100%;
+  width: 400px;
   height: 600px;
 }
 
@@ -62,7 +62,16 @@ form#form button.submit-button:active {
 /* Responsive  */
 
 @media (max-width: 768px) {
+
+    section#form-page {
+        height: auto;
+    }
     section#form-container div img {
         display: none;
+    }
+
+    section#form-container form#form {
+        height: auto;
+        padding: 25px;
     }
 }
