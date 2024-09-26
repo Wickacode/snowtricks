@@ -16,6 +16,19 @@ class TricksController extends AbstractController
         ]);
     }
 
+    #[Route('/trick/updateTrick/{id}', name: 'app_updateTrick')]
+    public function updateTrick($id): Response {
+        var_dump($id);
+        return $this->render('tricks/modify-trick.html.twig', [
+            'controller_name' => 'TricksController',
+        ]);
+    }
 
-    
+    #[Route('/trick/deleteTrick/{id}', name: 'app_deleteTrick')]
+    public function deleteTrick($id): Response {
+        var_dump($id);
+        return $this->render('home/home.html.twig', [
+            'controller_name' => 'HomeController',
+        ]);
+    }
 }

@@ -47,9 +47,9 @@ navLinks.classList.toggle('active');
 				</button>
 
 				<ul>
-					<li><ahref="{{path('app_home')}}">Accueil</a></li>
-					<li><ahref="{{path('app_login')}}">Connexion</a></li>
-					<li><ahref="{{path('app_register')}}">Inscription</a></li>
+					<li> <a href="{{path('app_home')}}">Accueil</a> </li>
+					<li> <a href="{{path('app_login')}}">Connexion</a> </li>
+					<li> <a href="{{path('app_register')}}">Inscription</a> </li>
 				</ul>
 			</nav>
 		</header>
@@ -67,8 +67,8 @@ navLinks.classList.toggle('active');
 			<!-- Liens -->
 			<div class="footer-links">
 				<a href="/">Accueil</a>
-				<a href="/about">Connexion</a>
-				<a href="/services">Inscription</a>
+				<a href="{{path('app_login')}}">Connexion</a>
+				<a href="{{path('app_register')}}">Inscription</a>
 			</div>
 
 			<!-- Réseaux sociaux -->
