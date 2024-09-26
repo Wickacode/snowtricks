@@ -46,7 +46,6 @@ a {
   text-decoration: none;
 }
 
-
 /* Custom style */
 
 .ta {
@@ -125,37 +124,38 @@ section#home-intro div.bottom-nav i.fa-angles-down {
 @keyframes heartbeat {
   from {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-transform-origin: center center;
-            transform-origin: center center;
+    transform-origin: center center;
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
   10% {
     -webkit-transform: scale(0.91);
-            transform: scale(0.91);
+    transform: scale(0.91);
     -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
   }
   17% {
     -webkit-transform: scale(0.98);
-            transform: scale(0.98);
+    transform: scale(0.98);
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
   33% {
     -webkit-transform: scale(0.87);
-            transform: scale(0.87);
+    transform: scale(0.87);
     -webkit-animation-timing-function: ease-in;
-            animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
   }
   45% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-animation-timing-function: ease-out;
-            animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
 }
+
 /* ---- Home tricks List ----  */
 section#home-tricks-list {
   display: flex;
@@ -163,25 +163,109 @@ section#home-tricks-list {
   gap: 2em;
 }
 
-section#home-tricks-list .trick {
+section#home-tricks-list div.home-trick {
   position: relative;
   width: min-content;
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-section#home-tricks-list .trick .trick-img img {
+section#home-tricks-list div.home-trick .home-trick-img img {
   width: 300px;
   height: 320px;
   object-fit: cover;
   border-radius: 5px 5px 0 0;
 }
 
-section#home-tricks-list div.trick div.trick-name {
+section#home-tricks-list div.home-trick div.home-trick-name {
   color: var(--extra-dark-blue);
   text-transform: uppercase;
   text-align: center;
   padding: 40px;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* ---- Single trick ----  */
+
+section#single-trick-page div.single-trick div.img-container {
+  background-image: url("./../img/bg-trick.png");
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  background-position: center;
+  height: 80vh;
+}
+
+section#single-trick-page div.single-trick div.img-container h1 {
+  font-size: 2em;
+  margin-bottom: 40px;
+}
+
+section#single-trick-page div.single-trick img {
+  width: 700px;
+  border: 4px solid white;
+  border-radius: 10px;
+}
+
+section#single-trick-page div.single-trick div.others-medias {
+  margin: 20px auto;
+  overflow: hidden;
+  width: 98vw;
+}
+
+section#single-trick-page div.single-trick div.others-medias img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+}
+
+section#single-trick-page div.single-trick p {
+  width: 70%;
+  margin: 50px auto;
+}
+
+section#single-trick-page div.trick-details {
+  background-color: var(--extra-light-blue);
+  padding: 10px;
+  border-radius: 2px;
+  margin: auto;
+  width: 50%;
+}
+
+section#add-comment-section div.comment-section {
+  height: 250px;
+  width: 100%;
+  background-color: var(--extra-dark-blue);
+  margin: 40px auto;
+}
+
+section#add-comment-section div.comment-section textarea {
+  border: none;
+  padding: 10px;
+  height: 150px;
+  width: 500px;
+}
+
+section#add-comment-section div.comments-list {
+  width: 70%;
+  padding: 20px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+section#add-comment-section div.comments-list .comment {
+  margin-bottom: 20px;
+}
+
+section#add-comment-section div.comments-list .comment .avatar img {
+  width: 60px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+section#add-comment-section div.comments-list .comment .content {
+  border: 2px solid var(--extra-dark-blue);
+  padding: 10px;
 }

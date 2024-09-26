@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nom du trick
+{% endblock %}
+
+{% block body %}
+
+	<section id="single-trick-page" class="dfull fdc">
+		<div class="single-trick">
+			<div class="img-container dfull fdc">
+				<h1>Trick name</h1>
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+			</div>
+
+			<div class="others-medias dfull">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+			</div>
+
+			<div class="trick-details dfull gap">
+				<span>Crée le ... |</span>
+				<span>Groupe:... |</span>
+				<span>Modifié le ... </span>
+			</div>
+			<div class="trick-description">
+				<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+				<p>Blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
+			</div>
+
+
+		</div>
+	</section>
+
+	<section id="add-comment-section" class="dfull fdc">
+		<div class="comment-section dfull gap">
+			<textarea placeholder="Ajoutez votre commentaire ici..."></textarea>
+			<button class="submit-btn">Envoyer</button>
+		</div>
+
+		<div class="comments-list">
+			<div class="comment dfull gap">
+				<div class="avatar">
+					<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				</div>
+
+				<div class="content">
+					<h4 class="comment-author">Alice</h4>
+					<p class="comment-text">Super article, merci pour les informations ! ghdfghdfghdfghdfghdfhgdfghdfgjeh esfhs rdfhsf eseh seth srtghsdhf sgh</p>
+				</div>
+			</div>
+
+			<div class="comment dfull gap">
+				<div class="avatar">
+					<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				</div>
+
+				<div class="content">
+					<h4 class="comment-author">Alice</h4>
+					<p class="comment-text">Super article, merci pour les informations !</p>
+				</div>
+			</div>
+
+			<div class="comment dfull gap">
+				<div class="avatar">
+					<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				</div>
+
+				<div class="content">
+					<h4 class="comment-author">Alice</h4>
+					<p class="comment-text">Super article, merci pour les informations !</p>
+				</div>
+			</div>
+
+			<div class="comment dfull gap">
+				<div class="avatar">
+					<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+				</div>
+
+				<div class="content">
+					<h4 class="comment-author">Alice</h4>
+					<p class="comment-text">Super article, merci pour les informations !</p>
+				</div>
+			</div>
+		</div>
+
+	</section>
+{% endblock %}

@@ -15,4 +15,7 @@ class TricksController extends AbstractController
             'controller_name' => 'TricksController',
         ]);
     }
+
+
+    
 }
