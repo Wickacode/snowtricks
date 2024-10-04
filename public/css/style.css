@@ -78,6 +78,10 @@ a {
   gap: 2em;
 }
 
+.vh {
+  height: 100vh;
+}
+
 /* Icones  */
 i {
   cursor: pointer;
@@ -189,9 +193,8 @@ section#home-tricks-list div.home-trick div.home-trick-name {
 /* ---- Single trick ----  */
 
 section#single-trick-page div.single-trick div.img-container {
-  background-image: url("./../img/bg-trick.png");
+  background-image: url("./../img/bg-blur.png");
   background-size: cover;
-  backdrop-filter: blur(10px);
   background-position: center;
   height: 80vh;
 }
@@ -269,3 +272,10 @@ section#add-comment-section div.comments-list .comment .content {
   border: 2px solid var(--extra-dark-blue);
   padding: 10px;
 }
+
+/* Update article  */
+section#updateArticle {
+  background-color: #4baf3b;
+}
+
+

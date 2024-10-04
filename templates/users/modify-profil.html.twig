@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gérer votre compte
+{% endblock %}
+
+{% block body %}
+
+	<section id="form-page" class="dfull">
+
+		<section id="form-container" class="dfull">
+			<div>
+				<img src="{{ asset('img/bg-blur.png')}}" / alt="image">
+			</div>
+
+			<form id="form" class="dfull fdc">
+				<h2>Gérer votre compte</h2>
+				<label for="firstname" class="dfull fdc">
+					<label for="pseudo">Modifier votre pseudo</label>
+					<span>Pseudo actuel : </span>
+					<input type="text" id="pseudo" name="pseudo" placeholder="Nouveau pseudo" required>
+				</label>
+
+
+				<label for="firstname" class="dfull fdc">
+					<label for="pseudo">Modifier votre e-mail</label>
+					<span>Email actuel : </span>
+					<input type="email" id="email" name="email" placeholder="Nouvelle adresse mail" required>
+				</label>
+
+				<div class="dfull fdc">
+					<a href="{{path('app_modifyPassword')}}">Modifier votre mot de passe</a>
+				</div>
+
+				<button type="submit" class="submit-button">Valider les modifications</button>
+
+			</form>
+		</section>
+
+	</section>
+
+{% endblock %}

@@ -15,4 +15,20 @@ class UsersController extends AbstractController
             'controller_name' => 'UsersController',
         ]);
     }
+
+    #[Route('/users/updateUser', name: 'app_updateUser')]
+    public function updateUser(): Response
+    {
+        return $this->render('users/modify-profil.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
+
+    #[Route('/users/modifyPassword', name: 'app_modifyPassword')]
+    public function modifyPassword(): Response
+    {
+        return $this->render('users/modify-password.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
 }
