@@ -19,6 +19,10 @@ class Medias
     #[ORM\Column(length: 10)]
     private ?string $type = null;
 
+    #[ORM\ManyToOne(inversedBy: 'medias')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Tricks $tricks = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Medias
     public function setType(string $type): static
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTricks(): ?Tricks
+    {
+        return $this->tricks;
+    }
+
+    public function setTricks(?Tricks $tricks): static
+    {
+        $this->tricks = $tricks;
 
         return $this;
     }
