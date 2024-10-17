@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+
+	<section id="form-page" class="dfull">
+
+		<section id="form-container" class="dfull">
+			<div>
+				<img src="{{ asset('img/form.jpg')}}" / alt="image">
+			</div>
+
+			<form id="form" class="dfull fdc">
+				<h2>Inscription</h2>
+				<label for="firstname">
+					<input type="text" id="firstname" name="firstname" placeholder="Pseudo" required>
+				</label>
+
+				<label for="email">
+					<input type="email" id="email" name="email" placeholder="Adresse email" required>
+				</label>
+
+				<label for="password">
+					<input type="password" id="password" name="password" placeholder="Mot de passe" required>
+				</label>
+
+				<label for="confirm_password">
+					<input type="password" id="confirm_password" name="confirm_password" placeholder="Confirmer mot de passe" required>
+				</label>
+
+				<button type="submit" class="submit-button">S'inscrire</button>
+
+
+				<div class="login-link">
+					<p>Déjà inscrit ?
+						<a href="{{ path('app_login') }}">Connectez-vous</a>
+					</p>
+				</div>
+			</form>
+		</section>
+
+	</section>
+
+{% endblock %}

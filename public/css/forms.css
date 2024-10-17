@@ -1,0 +1,77 @@
+section#form-page {
+  height: 100vh;
+}
+section#form-container {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  width: auto;
+  margin: 20px auto;
+}
+
+section#form-container div img {
+  width: 500px;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 5px 0 0 5px;
+}
+
+section#form-container form#form {
+  width: 400px;
+  height: 600px;
+}
+
+form#form h2 {
+  margin-bottom: 20px;
+}
+
+form#form input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  box-shadow: 0 0 5px var(--extra-light-blue);
+
+}
+
+form#form input::placeholder {
+    color: var(--extra-dark-blue);
+}
+
+form#form input:focus {
+  border-color: var(--dark-blue);
+  outline: none;
+  box-shadow: 0 0 5px var(--extra-dark-blue);
+}
+
+form#form button.submit-button {
+  background: var(--light-blue);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 14px;
+  margin: 20px 0;
+}
+
+form#form button.submit-button:hover,
+form#form button.submit-button:active {
+  background-color: initial;
+  color: var(--dark-blue);
+}
+
+/* Responsive  */
+
+@media (max-width: 768px) {
+
+    section#form-page {
+        height: auto;
+    }
+    section#form-container div img {
+        display: none;
+    }
+
+    section#form-container form#form {
+        height: auto;
+        padding: 25px;
+    }
+}

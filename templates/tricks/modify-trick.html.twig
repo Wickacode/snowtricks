@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nom du trick
+{% endblock %}
+
+{% block body %}
+
+<section id="updateArticle" class="dfull fdc gap vh">
+    <h1>Modifier l'Article</h1>
+    
+    <form action="/modifier-article" method="post" enctype="multipart/form-data" class="dfull fdc gap">
+        <!-- Modification du titre -->
+        <div class="form-group">
+            <label for="titre">Titre de l'article :</label>
+            <input type="text" id="titre" name="titre" value="Titre actuel de l'article">
+        </div>
+
+        <!-- Modification de l'image principale -->
+        <div class="form-group">
+            <label for="image-principale">Image principale :</label>
+            <input type="file" id="image-principale" name="image-principale" accept="image/*">
+            <div>
+                <img src="image-actuelle.jpg" alt="Image principale" class="image-preview">
+            </div>
+        </div>
+
+        <!-- Ajout d'images supplémentaires -->
+        <div class="form-group">
+            <label for="images-secondaires">Ajouter d'autres images :</label>
+            <input type="file" id="images-secondaires" name="images-secondaires[]" accept="image/*" multiple>
+        </div>
+
+        <!-- Ajout de vidéos -->
+        <div class="form-group">
+            <label for="videos">Ajouter des vidéos :</label>
+            <input type="file" id="videos" name="videos[]" accept="video/*" multiple>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="form-actions">
+            <button type="submit">Mettre à jour l'article</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
