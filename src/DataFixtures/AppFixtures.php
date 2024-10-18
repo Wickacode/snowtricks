@@ -51,20 +51,84 @@ class AppFixtures extends Fixture
             "Wow, incroyable ! Super maîtrise des rotations et des inversions, tout en fluidité !"
         ];
 
-        // $user = new User();
-        // $user->setUsername('admin')
-        //      ->setEmail($faker->safeEmail)
-        //      ->setPassword($this->passwordHasher->hashPassword($user, 'azerty'))
-        //      ->setDateCreate($faker->dateTimeBetween('-6 months'))
-        //      ->setDateUpdate(new \Datetime);
-        // if ($i == 0) {
-        //     $user->setRoles(['ROLE_ADMIN']);
-        // } else {
-        //     $user->setRoles(['ROLE_USER']);
-        // }
-        // $user->setIsActive(true)
-        //     ->setAvatar('img/upload/avatars/avatar' . $faker->numberBetween(1, 3) . '.png');
-        // $manager->persist($user);
-        // $users[] = $user;
+        //Fake admin
+        $user = new User();
+        $user->setUsername('admin')
+            ->setEmail('admin@gmail.com')
+            ->setPassword($this->passwordHasher->hashPassword($user, 'snowtricks2024'))
+            ->setDateCreateUser(new \Datetime)
+            ->setDateUpdateUser(new \Datetime)
+            ->setRoles(['ROLE_ADMIN'])
+            ->setAvatar('img/upload/avatars/jimmy.png');
+        $manager->persist($user);
+        $users[] = $user;
+
+        //Fake user
+        $user = new User();
+        $user->setUsername('user')
+            ->setEmail('user@gmail.com')
+            ->setPassword($this->passwordHasher->hashPassword($user, 'snowtricks2024'))
+            ->setDateCreateUser(new \Datetime)
+            ->setDateUpdateUser(new \Datetime)
+            ->setRoles(['ROLE_USER'])
+            ->setAvatar('img/upload/avatars/cute.jpg');
+        $manager->persist($user);
+        $users[] = $user;
+
+        //Fake categories
+        foreach ($categoriesName as $categoryName) {
+            $category = new Categories();
+            $category->setNameCat($categoryName);
+            $manager->persist($category);
+            $categories[] = $category;
+        }
+
+        // Fake tricks
+        for ($i = 0; $i < 10; $i++) {
+            $trick = new Tricks();
+            $trick->setTitleTrick($tricksName[$i])
+                ->setContentTrick($tricksContent[$i])
+                ->setDateCreateTrick(new \Datetime)
+                ->setDateUpdateTrick(new \Datetime)
+                ->setActiveTrick(true)
+                ->setSlug('on met quoi?')
+                ->setUsers($users[0])
+                ->setCategories($categories[1])
+                ->setMainImg('img/upload/' . $trick->getTitleTrick() . '_1.jpg');
+            $manager->persist($trick);
+        //Fake medias
+        for ($k = 2; $k < 5; $k++) {
+            $image = new Medias();
+            $image->setLink('img/upload/' . $trick->getTitleTrick() . '_' . $k . '.jpg')
+                ->setType('image')
+                ->setTricks($trick);
+            $manager->persist($image);
+        }
+
+        $video = new Medias();
+        $video->setLink('https://www.youtube.com/watch?v=PxhfDec8Ays')
+            ->setType('video')
+            ->setTricks($trick);
+        $manager->persist($video);
+
+
+        // Fake comments by trick
+        for ($j = 0; $j <= 5; $j++) {
+            $randomKey = array_rand($users);
+            $randomUser = $users[$randomKey];
+
+            $comment = new Comments();
+            $comment->setContentCom($commentsContent[$j])
+                ->setDateCreateCom(new \Datetime)
+                ->setActiveCom(true)
+                ->setUsers($randomUser)
+                ->setTricks($trick);
+            $manager->persist($comment);
+
+        }
     }
+        $manager->flush();
+
+    }
+
 }
