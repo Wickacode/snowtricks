@@ -6,38 +6,48 @@
 {% block body %}
 	<main>
 		<section id="home-intro" class="dfull fdc">
-		<div id="intro-container" class="dfull gap">
-			<div class="intro-text">
-				<h1>Bienvenue sur mon site!</h1>
-				<p>Je m'appelle Jimmy Sweat, et je suis un passionné de snowboard. Si tu veux découvrir ce sport incroyable, apprendre des figures stylées ou partager tes propres tricks, tu es au bon endroit !
-					<br/>Je te souhaite une excellente expérience sur mon site et j'ai hâte de voir tes contributions prochainement. À très bientôt sur les pistes !</p>
+			<div id="intro-container" class="dfull gap">
+				<div class="intro-text">
+					<h1>Bienvenue sur mon site!</h1>
+					<p>Je m'appelle Jimmy Sweat, et je suis un passionné de snowboard. Si tu veux découvrir ce sport incroyable, apprendre des figures stylées ou partager tes propres tricks, tu es au bon endroit !
+						<br/>Je te souhaite une excellente expérience sur mon site et j'ai hâte de voir tes contributions prochainement. À très bientôt sur les pistes !</p>
+				</div>
+				<div class="intro-img">
+					<img src="{{ asset('img/Jimmy.png')}}" / alt="image">
+				</div>
 			</div>
-			<div class="intro-img">
-				<img src="{{ asset('img/Jimmy.png')}}" / alt="image">
-			</div>
-		</div>
 
-		<div class="bottom-nav">
-		<a href="#home-tricks-list"><i class="fa-solid fa-angles-down"></i></a>
-		</div>
+			<div class="bottom-nav">
+				<a href="#home-tricks-list">
+					<i class="fa-solid fa-angles-down"></i>
+				</a>
+			</div>
 
 		</section>
 
 		<section id="home-tricks-list" class="dfull fdc">
 			<h2>Découvrir quelques tricks</h2>
 
-			<section id="home-tricks-container" class="dfull fw gap">
-				<div class="home-trick">
-					<div class="home-trick-img">
-						<img src="{{ asset('img/Ollie.jpg')}}" / alt="image">
+			
+				<section id="home-tricks-container" class="dfull fw gap">
+				{% for trick in tricks %}	
+					<div class="home-trick">
+						<div class="home-trick-img">
+							<img src="{{trick.mainImg}}" / alt="image">
+						</div>
+						<div class="home-trick-name dfull gap">
+							<a href="{{ path('app_trick', {'id': trick.id}) }}">{{ trick.titleTrick }}</a>
+							<a href="{{ path('app_updateTrick', {'id': trick.id}) }}">
+								<i class="fa-solid fa-pencil"></i>
+							</a>
+							<a href="{{path('app_deleteTrick', {'id': trick.id})}}">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</div>
 					</div>
-					<div class="home-trick-name dfull gap">
-						<a href="{{path('app_trick')}}">Nom du trick</a>
-						<a href="{{path('app_updateTrick', {'id': '2'})}}"><i class="fa-solid fa-pencil"></i></a>
-						<a href="{{path('app_deleteTrick', {'id': '1'})}}"><i class="fa-solid fa-trash"></i></a>
-					</div>
-				</div>
-			</section>
+				{% endfor %}	
+				</section>
+			
 
 		</section>
 
