@@ -1,5 +1,7 @@
 /* Font */
 @import url("https://fonts.googleapis.com/css2?family=Hubballi&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap');
+
 
 /* Colors */
 :root {
@@ -21,7 +23,9 @@
 /* Text */
 h1,
 h2 {
-  text-transform: uppercase;
+  font-family: "Sanchez", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 h1 {
@@ -94,17 +98,31 @@ i.fa-pencil:hover {
 i.fa-trash:hover {
   color: #b75c1b;
 }
-main {
-  width: 80%;
-  margin: auto;
+
+.w70 {
+  width: 70%;
 }
 
 /* Home Page */
-/* ---- Home Intro ---- */
-section#home-intro {
-  width: 80%;
+
+section#home-intro  {
+  position: relative;
+  background-image: url('./../img/bg-banner.jpg');
+  background-size: cover;
+  background-position: center;
   height: 90vh;
-  margin: auto;
+  overflow: hidden;
+}
+
+/* Ajouter un pseudo-élément pour le dégradé en bas */
+section#home-intro::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 1) 100%);
 }
 
 section#home-intro div.intro-text {
@@ -160,11 +178,17 @@ section#home-intro div.bottom-nav i.fa-angles-down {
   }
 }
 
+
 /* ---- Home tricks List ----  */
 section#home-tricks-list {
   display: flex;
   flex-direction: column;
   gap: 2em;
+}
+
+section#home-tricks-list h2 {
+  margin: 50px 0;
+  font-size: 2.5em;
 }
 
 section#home-tricks-list div.home-trick {
@@ -262,8 +286,8 @@ section#add-comment-section div.comments-list .comment {
 }
 
 section#add-comment-section div.comments-list .comment .avatar img {
-  width: 100px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
   border-radius: 50%;
 }

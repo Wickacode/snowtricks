@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[ORM\Entity(repositoryClass: TricksRepository::class)]
 class Tricks
@@ -76,6 +77,8 @@ class Tricks
     public function setTitleTrick(string $titleTrick): static
     {
         $this->titleTrick = $titleTrick;
+        $slugger = new AsciiSlugger('fr');
+        $this->slug = $slugger->slug($titleTrick);
 
         return $this;
     }

@@ -91,7 +91,6 @@ class AppFixtures extends Fixture
                 ->setDateCreateTrick(new \Datetime)
                 ->setDateUpdateTrick(new \Datetime)
                 ->setActiveTrick(true)
-                ->setSlug('on met quoi?')
                 ->setUsers($users[0])
                 ->setCategories($categories[1])
                 ->setMainImg('img/upload/' . $trick->getTitleTrick() . '_1.jpg');
