@@ -6,14 +6,28 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class AuthFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add(child: 'username')
+            ->add('email', EmailType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Email'
+                )
+            ))
             ->add('password')
+
+            ->add('password', PasswordType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Mot de passe'
+                )
+            ))
         ;
     }
 

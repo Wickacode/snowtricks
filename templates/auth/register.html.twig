@@ -12,23 +12,24 @@
 				<img src="{{ asset('img/form.jpg')}}" / alt="image">
 			</div>
 
-			<form id="form" class="dfull fdc">
+			{{ form_start(formRegisterUser) }}
+			<div id="form" class="dfull fdc">
 				<h2>Inscription</h2>
-				<label for="firstname">
-					<input type="text" id="firstname" name="firstname" placeholder="Pseudo" required>
-				</label>
+				<label for="registerUsername" class="labelForm">Nom d'utilisateur</label><br/>
+				{{ form_widget(formRegisterUser.username) }}
+				{{ form_errors(formRegisterUser.username) }}
 
-				<label for="email">
-					<input type="email" id="email" name="email" placeholder="Adresse email" required>
-				</label>
+				<label for="registerEmail" class="labelForm">Email</label><br/>
+				{{ form_widget(formRegisterUser.email) }}
+				{{ form_errors(formRegisterUser.email) }}
 
-				<label for="password">
-					<input type="password" id="password" name="password" placeholder="Mot de passe" required>
-				</label>
+				<label for="password" class="labelForm">Mot de passe</label><br/>
+				{{ form_widget(formRegisterUser.password) }}
+				{{ form_errors(formRegisterUser.password) }}
 
-				<label for="confirm_password">
-					<input type="password" id="confirm_password" name="confirm_password" placeholder="Confirmer mot de passe" required>
-				</label>
+				<label for="passwordConfirm" class="labelForm">Confirmer votre mot de passe</label><br/>
+				{{ form_widget(formRegisterUser.passwordConfirm) }}
+				{{ form_errors(formRegisterUser.passwordConfirm) }}
 
 				<button type="submit" class="submit-button">S'inscrire</button>
 
@@ -38,7 +39,8 @@
 						<a href="{{ path('app_login') }}">Connectez-vous</a>
 					</p>
 				</div>
-			</form>
+			</div>
+			{{ form_end(formRegisterUser) }}
 		</section>
 
 	</section>

@@ -47,13 +47,23 @@ navLinks.classList.toggle('active');
 				</button>
 
 				<ul>
-					<li> <a href="{{path('app_home')}}">Accueil</a> </li>
-					<li> <a href="{{path('app_login')}}">Connexion</a> </li>
-					<li> <a href="{{path('app_register')}}">Inscription</a> </li>
-				</ul>
+					<li>
+						<a href="{{path('app_home')}}">Accueil</a>
+					</li>
+					{% if app.user %}
+						<li>
+							<a href="{{path('app_updateUser')}}">Modifier son profil</a>
+						</li>
+					{% else %}
 
-				<ul>
-				<li><a href="{{path('app_updateUser')}}">Modifier son profil</a></li>				
+						<li>
+							<a href="{{path('app_login')}}">Connexion</a>
+						</li>
+						<li>
+							<a href="{{path('app_register')}}">Inscription</a>
+						</li>
+					{% endif %}
+
 				</ul>
 			</nav>
 		</header>

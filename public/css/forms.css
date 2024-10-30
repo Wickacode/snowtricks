@@ -23,7 +23,7 @@ form#form h2 {
   margin-bottom: 20px;
 }
 
-form#form input {
+.formInput {
   padding: 10px;
   border: none;
   border-radius: 5px;

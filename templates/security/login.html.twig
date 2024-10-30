@@ -11,21 +11,20 @@
 			<div>
 				<img src="{{ asset('img/form2.jpg')}}" / alt="image">
 			</div>
-
-			<form id="form" class="dfull fdc">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
+			{% endif %}
+			{{ form_start(formLoginUser) }}
+			<div id="form" class="dfull fdc">
 				<h2>Connexion</h2>
-				<label for="firstname">
-					<input type="text" id="firstname" name="firstname" placeholder="Pseudo" required>
-				</label>
 
+				<label for="registerEmail" class="labelForm">Email</label><br/>
+				{{ form_widget(formLoginUser.email) }}
+				{{ form_errors(formLoginUser.email) }}
 
-				<label for="email">
-					<input type="email" id="email" name="email" placeholder="Adresse email" required>
-				</label>
-
-				<label for="password">
-					<input type="password" id="password" name="password" placeholder="Mot de passe" required>
-				</label>
+				<label for="password" class="labelForm">Mot de passe</label><br/>
+				{{ form_widget(formLoginUser.password) }}
+				{{ form_errors(formLoginUser.password) }}
 
 				<div class="forgot-password">
 					<a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
@@ -40,7 +39,8 @@
 						<a href="{{ path('app_register') }}">Inscrivez-vous</a>
 					</p>
 				</div>
-			</form>
+			</div>
+			{{ form_end(formLoginUser) }}
 		</section>
 
 	</section>
