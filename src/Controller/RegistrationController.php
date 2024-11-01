@@ -32,31 +32,47 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
             $plainPassword = $form->get('plainPassword')->getData();
-
+            $dateCreate = new \DateTime();
+            $confirmationToken = md5(random_bytes(60));
             // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword))
+                ->setAvatar('img/avatar.png')
+                ->setDateCreateUser($dateCreate)
+                ->setDateUpdateUser($dateCreate)
+                ->setVerified(false)
+                ->setRoles(["ROLE_USER"])
+                ->setTokenNewPassUser($confirmationToken);
+            ;
 
             $entityManager->persist($user);
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('jessica.garrido.di@gmail.com', 'Jessica'))
                     ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Veuillez confirmer votre adresse mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
 
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_success_register');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
     }
+
+    #[Route('/register/success', name: 'app_success_register')]
+    public function successRegister() {
+        return $this->render('registration/successRegister.html.twig');
+    }
+
 
     #[Route('/verify/email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
