@@ -14,12 +14,15 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
     #[ORM\Column(length: 180)]
     private ?string $email = null;
@@ -55,6 +58,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * )
      */
     private $passwordConfirm;
+    #[ORM\Column]
+    private ?bool $isVerified = null;
 
 
     /**
@@ -68,9 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'users', orphanRemoval: true)]
     private Collection $comments;
-
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
 
     public function __construct()
     {
@@ -281,6 +283,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPasswordConfirm(?string $passwordConfirm): self
     {
         $this->passwordConfirm = $passwordConfirm;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

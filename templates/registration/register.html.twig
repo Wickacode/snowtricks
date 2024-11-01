@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	<section id="form-page" class="dfull">
+
+		<section id="form-container" class="dfull">
+			<div>
+				<img src="{{ asset('img/form.jpg')}}" / alt="image">
+			</div>
+			{% for flash_error in app.flashes('verify_email_error') %}
+				<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+			{% endfor %}
+
+			{{ form_errors(registrationForm) }}
+
+			{{ form_start(registrationForm) }}
+			<div id="form" class="dfull fdc">
+				<h2>Inscription</h2>
+				<label for="registerUsername" class="labelForm">Nom d'utilisateur</label><br/>
+				{{ form_widget(registrationForm.username) }}
+				<label for="registerEmail" class="labelForm">Email</label><br/>
+				{{ form_widget(registrationForm.email) }}
+				<label for="password" class="labelForm">Mot de passe</label><br/>
+				{{ form_widget(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+				<label for="passwordConfirm" class="labelForm">Confirmer votre mot de passe</label><br/>
+				{{ form_widget(registrationForm.passwordConfirm, {
+            label: 'Password'
+        }) }}
+				{{ form_widget(registrationForm.agreeTerms) }}
+
+				<button type="submit" class="submit-button">S'inscrire</button>
+				<div class="login-link">
+					<p>Déjà inscrit ?
+						<a href="{{ path('app_login') }}">Connectez-vous</a>
+					</p>
+				</div>
+			</div>
+			{{ form_end(registrationForm) }}
+		</section>
+	</section>
+{% endblock %}

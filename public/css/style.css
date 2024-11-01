@@ -126,10 +126,17 @@ section#home-intro::after {
 }
 
 section#home-intro div.intro-text {
-  border: 2px solid var(--extra-light-blue);
   border-radius: 5px;
   padding: 5em 3em;
   width: 50%;
+}
+
+section#home-intro div.intro-text h1 {
+  font-size: 3em;
+}
+
+section#home-intro div.intro-text h1 > span {
+  font-size: 3.1em;
 }
 
 section#home-intro div.intro-img img {
