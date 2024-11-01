@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Form\ForgotPasswordFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -31,10 +33,13 @@ class SecurityController extends AbstractController
     }
 
     #[Route('/forgotPassword', name: 'app_forgot_password')]
-    public function forgotPassword(): Response
+    public function forgotPassword(Request $request): Response
     {
+        $form = $this->createForm(ForgotPasswordFormType::class);
+        $form->handleRequest($request);
         return $this->render('auth/forgot-password.html.twig', [
             'controller_name' => 'AuthController',
+            'forgotPasswordForm' => $form,
         ]);
     }
 }
