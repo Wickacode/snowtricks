@@ -6,6 +6,7 @@ use App\Entity\Categories;
 use App\Entity\Tricks;
 use App\Entity\User;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -24,7 +25,7 @@ class TricksFormType extends AbstractType
                     'placeholder' => 'Nom de la figure'
                 )
             ))
-            ->add('contentTrick', TextType::class, array(
+            ->add('contentTrick', TextareaType::class, array(
                 'attr' => array(
                     'class' => 'formInput',
                     'placeholder' => 'Description de la figure'
@@ -37,14 +38,15 @@ class TricksFormType extends AbstractType
                 )
             ))
             ->add('mediaImages', FileType::class, array(
+                'mapped' => false,
+                'multiple' => true,
                 'attr' => array(
                     'class' => 'formInput',
-                    'placeholder' => 'Images secondaires',
-                    'multiple' => true 
-                ),
-                'multiple' => true,
+                    'placeholder' => 'Images secondaires'
+                )
             ))
             ->add('mediaVideo', UrlType::class, array(
+                'mapped' => false,
                 'attr' => array(
                     'class' => 'formInput',
                     'placeholder' => 'Vidéo'
@@ -53,7 +55,7 @@ class TricksFormType extends AbstractType
             ->add('categories', EntityType::class, array(
                 'class' => Categories::class,
                 'choice_label' => 'nameCat'
-                ))
+            ))
         ;
     }
 

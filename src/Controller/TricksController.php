@@ -14,10 +14,12 @@ use Symfony\Component\Routing\Attribute\Route;
 class TricksController extends AbstractController
 {
     #[Route('/{slug}', name: 'app_trick')]
-    public function showTrick($id, TricksRepository $trickRepository, CommentsRepository $commentsRepository): Response
+    public function showTrick($slug, TricksRepository $trickRepository, CommentsRepository $commentsRepository): Response
     {
-        $trick = $trickRepository->findOneById($id);
-        $comments = $commentsRepository->findByTricks($id);
+        $trick = $trickRepository->findOneBySlug($slug);
+        $idTrick = $trick->getId();
+       
+        $comments = $commentsRepository->findByTricks($idTrick);
 
         return $this->render('tricks/trick.html.twig', [
             'controller_name' => 'TricksController',
