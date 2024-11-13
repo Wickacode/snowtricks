@@ -5,6 +5,9 @@ namespace App\Form;
 use App\Entity\Categories;
 use App\Entity\Tricks;
 use App\Entity\User;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,15 +18,42 @@ class TricksFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titleTrick')
-            ->add('contentTrick')
-            ->add('mainImg')
-            ->add('images')
-            ->add('videos')
-            ->add('categories', EntityType::class, [
+            ->add('titleTrick', TextType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Nom de la figure'
+                )
+            ))
+            ->add('contentTrick', TextType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Description de la figure'
+                )
+            ))
+            ->add('mainImg', FileType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Image principale'
+                )
+            ))
+            ->add('mediaImages', FileType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Images secondaires',
+                    'multiple' => true 
+                ),
+                'multiple' => true,
+            ))
+            ->add('mediaVideo', UrlType::class, array(
+                'attr' => array(
+                    'class' => 'formInput',
+                    'placeholder' => 'Vidéo'
+                )
+            ))
+            ->add('categories', EntityType::class, array(
                 'class' => Categories::class,
-                'choice_label' => 'id',
-            ])
+                'choice_label' => 'nameCat'
+                ))
         ;
     }
 

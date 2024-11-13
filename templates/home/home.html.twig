@@ -36,11 +36,11 @@
 							<img src="{{trick.mainImg}}" / alt="image">
 						</div>
 						<div class="home-trick-name dfull gap">
-							<a href="{{ path('app_trick', {'id': trick.id}) }}">{{ trick.titleTrick }}</a>
-							<a href="{{ path('app_updateTrick', {'id': trick.id}) }}">
+							<a href="{{ path('app_trick', {'slug': trick.slug}) }}">{{ trick.titleTrick }}</a>
+							<a href="{{ path('app_updateTrick', {'slug': trick.slug}) }}">
 								<i class="fa-solid fa-pencil"></i>
 							</a>
-							<a href="{{path('app_deleteTrick', {'id': trick.id})}}">
+							<a href="{{path('app_deleteTrick', {'slug': trick.slug})}}">
 								<i class="fa-solid fa-trash"></i>
 							</a>
 						</div>

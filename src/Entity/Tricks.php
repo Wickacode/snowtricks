@@ -58,11 +58,43 @@ class Tricks
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'tricks', orphanRemoval: true)]
     private Collection $comments;
 
+    // Ajout des nouvelles propriétés
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $mediaImages = null;
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $mediaVideo = null;
+
     public function __construct()
     {
         $this->medias = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
+
+    // Getters et Setters pour les nouvelles propriétés
+    public function getMediaImages(): ?string
+    {
+        return $this->mediaImages;
+    }
+
+    public function setMediaImages(?string $mediaImages): static
+    {
+        $this->mediaImages = $mediaImages;
+        return $this;
+    }
+
+    public function getMediaVideo(): ?string
+    {
+        return $this->mediaVideo;
+    }
+
+    public function setMediaVideo(?string $mediaVideo): static
+    {
+        $this->mediaVideo = $mediaVideo;
+        return $this;
+    }
+
+    // Les autres méthodes déjà existantes...
 
     public function getId(): ?int
     {
@@ -200,7 +232,6 @@ class Tricks
     public function removeMedia(Medias $media): static
     {
         if ($this->medias->removeElement($media)) {
-            // set the owning side to null (unless already changed)
             if ($media->getTricks() === $this) {
                 $media->setTricks(null);
             }
@@ -230,7 +261,6 @@ class Tricks
     public function removeComment(Comments $comment): static
     {
         if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
             if ($comment->getTricks() === $this) {
                 $comment->setTricks(null);
             }

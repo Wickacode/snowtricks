@@ -224,9 +224,6 @@ section#home-tricks-list div.home-trick div.home-trick-name {
 /* ---- Single trick ----  */
 
 section#single-trick-page div.single-trick div.img-container {
-  background-image: url("./../img/bg-blur.png");
-  background-size: cover;
-  background-position: center;
   height: 80vh;
 }
 
@@ -236,9 +233,9 @@ section#single-trick-page div.single-trick div.img-container h1 {
 }
 
 section#single-trick-page div.single-trick img {
-  width: 700px;
-  border: 4px solid white;
-  border-radius: 10px;
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
 }
 
 section#single-trick-page div.single-trick div.others-medias {
