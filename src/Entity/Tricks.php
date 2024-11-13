@@ -49,13 +49,13 @@ class Tricks
     /**
      * @var Collection<int, Medias>
      */
-    #[ORM\OneToMany(targetEntity: Medias::class, mappedBy: 'tricks', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Medias::class, mappedBy: 'tricks', orphanRemoval: true, cascade: ['persist'] )]
     private Collection $medias;
 
     /**
      * @var Collection<int, Comments>
      */
-    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'tricks', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'tricks', orphanRemoval: true, cascade: ['persist'])]
     private Collection $comments;
 
     public function __construct()
