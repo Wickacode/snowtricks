@@ -12,7 +12,11 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(TricksRepository $trickRepository ): Response
     {
+        // $user = $this->getUser();
+        // dump($user);
+        // die;
         $tricks = $trickRepository->findAll();
+
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',
             'tricks' => $tricks,

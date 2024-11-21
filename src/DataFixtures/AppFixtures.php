@@ -60,7 +60,7 @@ class AppFixtures extends Fixture
             ->setDateUpdateUser(new \Datetime)
             ->setRoles(['ROLE_ADMIN'])
             ->setAvatar('img/upload/avatars/jimmy.png')
-            ->setVerified(isVerified: false);
+            ->setVerified(isVerified: true);
         $manager->persist($user);
         $users[] = $user;
 
@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
             ->setDateUpdateUser(new \Datetime)
             ->setRoles(['ROLE_USER'])
             ->setAvatar('img/upload/avatars/cute.jpg')
-            ->setVerified(isVerified: false);
+            ->setVerified(isVerified: true);
         $manager->persist($user);
         $users[] = $user;
 

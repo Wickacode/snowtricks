@@ -35,7 +35,7 @@ class Tricks
     #[ORM\Column]
     private ?bool $isActiveTrick = null;
 
-    #[ORM\Column(length: 250)]
+    #[ORM\Column(length: 250, unique: true)]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'tricks')]

@@ -23,7 +23,7 @@ class TricksController extends AbstractController
     {
         $trick = $trickRepository->findOneBySlug($slug);
         $idTrick = $trick->getId();
-       
+
         $comments = $commentsRepository->findByTricks($idTrick);
 
         return $this->render('tricks/trick.html.twig', [
@@ -34,27 +34,26 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/addTrick', name: 'app_newTrick')]
-    public function addTrick(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response {
+    public function addTrick(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response
+    {
         $trick = new Tricks();
         $form = $this->createForm(TricksFormType::class, $trick);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $dateCreateTrick = new \DateTime();
             $mainImage = $form->get('mainImg')->getData();
 
             $trick->setDateCreateTrick($dateCreateTrick)
-            ->setDateUpdateTrick($dateCreateTrick)
+                ->setDateUpdateTrick($dateCreateTrick)
                 ->setActiveTrick(1)
                 ->setUsers($this->getUser());
 
-            if($mainImage !== null)
-            {
+            if ($mainImage !== null) {
                 $originalMainImage = pathinfo($mainImage->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeMainImage = $slugger->slug($originalMainImage);
-                $mainImageFilename = 'img/upload/'.$safeMainImage.'-'.uniqid().'.'.$mainImage->guessExtension();
+                $mainImageFilename = 'img/upload/' . $safeMainImage . '-' . uniqid() . '.' . $mainImage->guessExtension();
                 try {
                     $mainImage->move(
                         $this->getParameter('images_directory'),
@@ -64,17 +63,15 @@ class TricksController extends AbstractController
                 }
 
                 $trick->setMainImg($mainImageFilename);
-            }
-            else
-            {
+            } else {
                 $trick->setMainImg('img/bg-banner.jpg');
             }
 
             $imagesGallery = $form->get('mediaImages')->getData();
 
-            foreach($imagesGallery as $image){
+            foreach ($imagesGallery as $image) {
                 //generate a new file name
-                $fichier = 'img/upload/'.md5(uniqid()) . '.' . $image->guessExtension();
+                $fichier = 'img/upload/' . md5(uniqid()) . '.' . $image->guessExtension();
 
                 //copy the file in the file upload
                 $image->move(
@@ -85,16 +82,15 @@ class TricksController extends AbstractController
                 //store the images in the database
                 $img = new Medias();
                 $img->setLink($fichier)
-                ->setType('image');
+                    ->setType('image');
                 $trick->addMedia($img);
             }
             $linkVideo = $form->get('mediaVideo')->getData();
-            
-            if($linkVideo !== null)
-            {
+
+            if ($linkVideo !== null) {
                 $video = new Medias();
                 $video->setLink($linkVideo)
-                ->setType('video');
+                    ->setType('video');
                 $trick->addMedia($video);
             }
 
@@ -111,16 +107,46 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/updateTrick/{slug}', name: 'app_updateTrick')]
-    public function updateTrick($slug): Response {
+    public function updateTrick($slug): Response
+    {
         return $this->render('tricks/modify-trick.html.twig', [
             'controller_name' => 'TricksController',
         ]);
     }
 
-    #[Route('/trick/deleteTrick/{slug}', name: 'app_deleteTrick')]
-    public function deleteTrick($slug): Response {
-        return $this->render('home/home.html.twig', [
-            'controller_name' => 'HomeController',
+    #[Route('/deleteTrick/{slug}', name: 'app_deleteTrick')]
+    public function deleteTrick($slug, Request $request, TricksRepository $tricksRepository): Response
+    {
+        $trick = $tricksRepository->findOneBy(['slug' => $slug]);
+
+        if (!$trick) {
+            throw $this->createNotFoundException('Trick not found');
+        }
+
+        $user = $this->getUser();
+        $userTrick = $trick->getUsers();
+        $idTrick = $userTrick->getId();
+
+        if ($user !== null) {
+            $idUser = $user->getId();
+            $userRoles = $user->getRoles();
+
+            if (in_array('ROLE_ADMIN', $userRoles, true)) {
+                $isAdmin = true;
+            } else {
+                $isAdmin = false;
+            }
+
+            if ($idUser !== null && ($idUser == $idTrick || $isAdmin)) {
+                $tricksRepository->remove($trick, true);
+            }
+        }
+
+        $tricks = $tricksRepository->findAll();
+
+        return $this->redirectToRoute('app_home', [
+            'tricks' => $tricks,
         ]);
     }
+
 }

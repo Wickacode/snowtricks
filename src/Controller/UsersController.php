@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UsersController extends AbstractController
 {
-    #[Route('/users', name: 'app_users')]
+    #[Route('/user', name: 'app_users')]
     public function index(): Response
     {
         return $this->render('users/index.html.twig', [
@@ -18,7 +18,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/users/updateUser', name: 'app_updateUser')]
+    #[Route('/user/updateUser', name: 'app_updateUser')]
     public function updateUser(Request $request): Response
     {
         $user = $this->getUser();
@@ -31,7 +31,15 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/users/modifyPassword', name: 'app_modifyPassword')]
+    #[Route('/user/profil', name: 'app_profilUser')]
+    public function profilUser(): Response
+    {
+        return $this->render('users/profil-user.html.twig', [
+            'controller_name' => 'UsersController',
+        ]);
+    }
+
+    #[Route('/user/modifyPassword', name: 'app_modifyPassword')]
     public function modifyPassword(): Response
     {
         return $this->render('users/modify-password.html.twig', [
