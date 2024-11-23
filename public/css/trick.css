@@ -1,0 +1,113 @@
+section#single-trick-page div.single-trick {
+  width: 100%;
+}
+section#single-trick-page div.single-trick div.img-container {
+  height: 80vh;
+}
+
+section#single-trick-page div.single-trick div.img-container h1 {
+  font-size: 12em;
+  position: absolute;
+  text-shadow: 4px 3px 0 #7A7A7A;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  animation: focus-in-expand-fwd 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes focus-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-800px);
+            transform: translateZ(-800px);
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-filter: blur(0);
+            filter: blur(0);
+    opacity: 1;
+  }
+}
+
+
+section#single-trick-page div.single-trick .main-img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+}
+
+section#single-trick-page div.single-trick div.others-medias {
+  margin: 20px auto;
+  overflow: hidden;
+  width: 98vw;
+}
+
+section#single-trick-page div.single-trick div.others-medias img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+}
+
+section#single-trick-page div.single-trick p {
+  width: 70%;
+  margin: 50px auto;
+}
+
+section#single-trick-page div.trick-details {
+  background-color: var(--extra-light-blue);
+  padding: 10px;
+  border-radius: 2px;
+  margin: auto;
+  width: 50%;
+}
+
+/* Section slider d'images supplémentaires */
+
+div.gallery-container .gallery-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+
+/* Section commentaires */
+section#add-comment-section div.comment-section {
+  height: 250px;
+  width: 100%;
+  background-color: var(--extra-dark-blue);
+  margin: 40px auto;
+}
+
+section#add-comment-section div.comment-section textarea {
+  border: none;
+  padding: 10px;
+  height: 150px;
+  width: 500px;
+}
+
+section#add-comment-section div.comments-list {
+  width: 70%;
+  padding: 20px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+section#add-comment-section div.comments-list .comment {
+  margin-bottom: 20px;
+}
+
+section#add-comment-section div.comments-list .comment .avatar img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+section#add-comment-section div.comments-list .comment .content {
+  border: 2px solid var(--extra-dark-blue);
+  padding: 10px;
+}

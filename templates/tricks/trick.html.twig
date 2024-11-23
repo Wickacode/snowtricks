@@ -8,26 +8,54 @@
 	<section id="single-trick-page" class="dfull fdc">
 		<div class="single-trick">
 			<div class="img-container dfull fdc">
-				<img src="{{asset(trick.mainImg)}}" / alt="image">
-				<h1>{{trick.titleTrick}}</h1>
+				<img src="{{asset(trick.mainImg)}}" / alt="image" class="main-img">
+				<h1 class="dynamic-image-text">
+					{{ trick.titleTrick }}
+				</h1>
 			</div>
 
-			<div class="others-medias dfull">
-				<img src="" / alt="image">
-			</div>
-
+			{# Détails du trick #}
 			<div class="trick-details dfull gap">
-				<span>Crée le {{trick.dateCreateTrick | date('d-m-Y') }}</span>
-				<span>Groupe: {{trick.categories.nameCat}} |</span>
+				<span>Crée le
+					{{trick.dateCreateTrick | date('d-m-Y') }}</span>
+				<span>Groupe:
+					{{trick.categories.nameCat}}
+					|</span>
 				{% if trick.dateUpdateTrick != trick.dateCreateTrick %}
-				<span>Modifié le {{ trick.dateUpdateTrick | date('d-m-Y') }}</span>
+					<span>Modifié le
+						{{ trick.dateUpdateTrick | date('d-m-Y') }}</span>
 				{% endif %}
 			</div>
+
+			{# Images supplémentaires #}
+			<!-- Image container -->
+			<div class="gallery-container dfull gap">
+				{% for media in trick.medias %}
+
+					<div class="gallery-img-container">
+						{% if media.type == 'image' %}
+							<img src="{{ asset(media.link) }}" alt="{{ media.link }}" class="gallery-img">
+						{% endif %}
+					</div>
+
+				{% endfor %}
+			</div>
+
+			<div class="gallery-container dfull">
+				{% for media in trick.medias %}
+
+					<div class="gallery-video-container">
+						{% if media.type == 'video' %}
+							<iframe src="{{ media.link }}" class="gallery-video" width="560" height="315" title="Titre de la vidéo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						{% endif %}
+					</div>
+
+				{% endfor %}
+			</div>
+
 			<div class="trick-description">
 				<p>{{trick.contentTrick}}</p>
 			</div>
-
-
 		</div>
 	</section>
 
@@ -38,21 +66,26 @@
 		</div>
 
 		<div class="comments-list">
-		{% for comment in comments %}
-			<div class="comment dfull gap">
-			
-				<div class="avatar">
-					<img src="{{ asset(comment.users.avatar)}}" / alt="image">
-				</div>
+			{% for comment in comments %}
+				<div class="comment dfull gap">
 
-				<div class="content">
-					<h4 class="comment-author">{{ comment.users.userName }}</h4>
-					<p class="comment-text">{{ comment.contentCom }}</p>
+					<div class="avatar">
+						<img src="{{ asset(comment.users.avatar)}}" / alt="image">
+					</div>
+
+					<div class="content">
+					<div class="dfull gap">
+						<h4 class="comment-author">{{ comment.users.userName }}</h4>
+						<p> Crée le {{ comment.dateCreateCom | date('d-m-Y') }} </p>
+					</div>
+						<p class="comment-text">{{ comment.contentCom }}</p>
+					</div>
+
 				</div>
-			
-			</div>
 			{% endfor %}
 		</div>
 
 	</section>
+
+
 {% endblock %}

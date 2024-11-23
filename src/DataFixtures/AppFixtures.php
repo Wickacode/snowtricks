@@ -107,7 +107,7 @@ class AppFixtures extends Fixture
         }
 
         $video = new Medias();
-        $video->setLink('https://www.youtube.com/watch?v=PxhfDec8Ays')
+        $video->setLink('https://www.youtube.com/embed/SFYYzy0UF-8?si=t9agcwhxLXOHvt8K')
             ->setType('video')
             ->setTricks($trick);
         $manager->persist($video);

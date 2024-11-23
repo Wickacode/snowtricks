@@ -4,34 +4,33 @@
 {% endblock %}
 
 {% block body %}
-	<section id="form-page" class="dfull">
+	<section id="form-page" class="dfull fdc">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 
 		<section id="form-container" class="dfull">
-			{% for message in app.flashes('success') %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
-                {% endfor %}
 			{{ form_errors(addTrickForm) }}
-
 			{{ form_start(addTrickForm) }}
-			<div id="form" class="dfull fdc">
+			<form id="form" class="dfull fdc">
 				<h2>Ajouter une figure</h2>
 				<label for="nameTrick" class="labelForm">Nom de la figure</label><br/>
 				{{ form_widget(addTrickForm.titleTrick) }}
 				<label for="contentTrick" class="labelForm">Description de la figure</label><br/>
 				{{ form_widget(addTrickForm.contentTrick) }}
-                <label for="catTrick" class="labelForm">Catégorie</label><br/>
+				<label for="catTrick" class="labelForm">Catégorie</label><br/>
 				{{ form_widget(addTrickForm.categories) }}
 				<label for="mainImg" class="labelForm">Image principale</label><br/>
 				{{ form_widget(addTrickForm.mainImg) }}
 				<label for="moreImg" class="labelForm">Images secondaires</label><br/>
 				{{ form_widget(addTrickForm.mediaImages) }}
-                <label for="video" class="labelForm">Vidéo</label><br/>
+				<label for="video" class="labelForm">Vidéo</label><br/>
 				{{ form_widget(addTrickForm.mediaVideo) }}
-		
+
 				<button type="submit" class="submit-button">Ajouter</button>
-			</div>
+			</form>
 			{{ form_end(addTrickForm) }}
 		</section>
 	</section>

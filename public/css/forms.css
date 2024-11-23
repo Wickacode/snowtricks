@@ -14,9 +14,10 @@ section#form-container div img {
   border-radius: 5px 0 0 5px;
 }
 
-section#form-container form#form {
+section#form-container form {
   width: 400px;
-  height: 600px;
+  height: auto;
+  padding: 20px;
 }
 
 form#form h2 {
@@ -57,6 +58,19 @@ form#form button.submit-button:hover,
 form#form button.submit-button:active {
   background-color: initial;
   color: var(--dark-blue);
+}
+
+/* Messages après soumission */
+
+.alert{
+  text-align: center;
+  padding: 15px;
+  color: white;
+  border-radius: 4px;
+}
+
+.alert-success {
+  background-color: #5aae5a;
 }
 
 /* Responsive  */

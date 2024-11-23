@@ -5,7 +5,6 @@
 
 {% block body %}
 	<section id="form-page" class="dfull">
-
 		<section id="form-container" class="dfull">
 			<div>
 				<img src="{{ asset('img/form.jpg')}}" / alt="image">
@@ -17,20 +16,16 @@
 			{{ form_errors(registrationForm) }}
 
 			{{ form_start(registrationForm) }}
-			<div id="form" class="dfull fdc">
-				<h2>Inscription</h2>
-				<label for="registerUsername" class="labelForm">Nom d'utilisateur</label><br/>
+			<form id="form" class="dfull fdc">
+				<h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
+				<label for="registerUsername">Nom d'utilisateur</label><br/>
 				{{ form_widget(registrationForm.username) }}
-				<label for="registerEmail" class="labelForm">Email</label><br/>
+				<label for="registerEmail">Email</label><br/>
 				{{ form_widget(registrationForm.email) }}
-				<label for="password" class="labelForm">Mot de passe</label><br/>
-				{{ form_widget(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-				<label for="passwordConfirm" class="labelForm">Confirmer votre mot de passe</label><br/>
-				{{ form_widget(registrationForm.passwordConfirm, {
-            label: 'Password'
-        }) }}
+				<label for="password">Mot de passe</label><br/>
+				{{ form_widget(registrationForm.plainPassword, {label: 'Password'}) }}
+				<label for="passwordConfirm">Confirmer votre mot de passe</label><br/>
+				{{ form_widget(registrationForm.passwordConfirm, {label: 'Password'}) }}
 				<label for="agreeTerms" class="labelForm">Accepter nos termes d'utilisation</label><br/>
 
 				{{ form_widget(registrationForm.agreeTerms) }}
@@ -41,7 +36,7 @@
 						<a href="{{ path('app_login') }}">Connectez-vous</a>
 					</p>
 				</div>
-			</div>
+			</form>
 			{{ form_end(registrationForm) }}
 		</section>
 	</section>

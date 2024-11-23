@@ -22,6 +22,8 @@ class TricksController extends AbstractController
     public function showTrick($slug, TricksRepository $trickRepository, CommentsRepository $commentsRepository): Response
     {
         $trick = $trickRepository->findOneBySlug($slug);
+        // dump($trick);
+        // die;
         $idTrick = $trick->getId();
 
         $comments = $commentsRepository->findByTricks($idTrick);
@@ -127,26 +129,15 @@ class TricksController extends AbstractController
         $userTrick = $trick->getUsers();
         $idTrick = $userTrick->getId();
 
-        if ($user !== null) {
+    
             $idUser = $user->getId();
             $userRoles = $user->getRoles();
 
-            if (in_array('ROLE_ADMIN', $userRoles, true)) {
-                $isAdmin = true;
-            } else {
-                $isAdmin = false;
-            }
-
-            if ($idUser !== null && ($idUser == $idTrick || $isAdmin)) {
+            if ($idUser !== null && ($idUser == $idTrick || $user->isAdmin())) {
                 $tricksRepository->remove($trick, true);
             }
-        }
-
-        $tricks = $tricksRepository->findAll();
-
-        return $this->redirectToRoute('app_home', [
-            'tricks' => $tricks,
-        ]);
+        
+        return $this->redirectToRoute('app_home');
     }
 
 }

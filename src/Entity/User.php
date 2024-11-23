@@ -121,6 +121,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    public function isAdmin(): bool
+    {
+        return in_array('ROLE_ADMIN',$this->getRoles() );
+    }
+
     /**
      * @param list<string> $roles
      */
