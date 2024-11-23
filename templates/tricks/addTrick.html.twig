@@ -14,7 +14,14 @@
 		<section id="form-container" class="dfull">
 			{{ form_errors(addTrickForm) }}
 			{{ form_start(addTrickForm) }}
-			<form id="form" class="dfull fdc">
+			{% if addTrickForm.titleTrick.vars.errors|length > 0 %}
+				<div class="error">
+					{% for error in addTrickForm.titleTrick.vars.errors %}
+						<p>{{ error.message }}</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div id="form" class="dfull fdc">
 				<h2>Ajouter une figure</h2>
 				<label for="nameTrick" class="labelForm">Nom de la figure</label><br/>
 				{{ form_widget(addTrickForm.titleTrick) }}
@@ -30,7 +37,7 @@
 				{{ form_widget(addTrickForm.mediaVideo) }}
 
 				<button type="submit" class="submit-button">Ajouter</button>
-			</form>
+			</div>
 			{{ form_end(addTrickForm) }}
 		</section>
 	</section>
