@@ -16,6 +16,8 @@ class HomeController extends AbstractController
         // dump($user);
         // die;
         $tricks = $trickRepository->findAll();
+        // dump($tricks);
+        // die;
 
         return $this->render('home/home.html.twig', [
             'controller_name' => 'HomeController',

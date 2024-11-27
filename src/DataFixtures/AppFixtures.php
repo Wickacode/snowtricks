@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
             ->setDateCreateUser(new \Datetime)
             ->setDateUpdateUser(new \Datetime)
             ->setRoles(['ROLE_ADMIN'])
-            ->setAvatar('img/upload/avatars/jimmy.png')
+            ->setAvatar('img/upload/avatars/jimmy.jpg')
             ->setVerified(isVerified: true);
         $manager->persist($user);
         $users[] = $user;
@@ -98,7 +98,7 @@ class AppFixtures extends Fixture
                 ->setMainImg('img/upload/' . $trick->getTitleTrick() . '_1.jpg');
             $manager->persist($trick);
         //Fake medias
-        for ($k = 2; $k < 5; $k++) {
+        for ($k = 2; $k < 6; $k++) {
             $image = new Medias();
             $image->setLink('img/upload/' . $trick->getTitleTrick() . '_' . $k . '.jpg')
                 ->setType('image')

@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Medias;
 use App\Entity\Tricks;
+use App\Entity\Comments;
 use App\Form\TricksFormType;
-use App\Repository\TricksRepository;
+use App\Form\CommentFormType;
 use App\Repository\CommentsRepository;
+use App\Repository\TricksRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,19 +21,40 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class TricksController extends AbstractController
 {
     #[Route('/{slug}', name: 'app_trick')]
-    public function showTrick($slug, TricksRepository $trickRepository, CommentsRepository $commentsRepository): Response
+    public function showTrick($slug, Request $request, TricksRepository $trickRepository, CommentsRepository $commentsRepository, EntityManagerInterface $manager): Response
     {
         $trick = $trickRepository->findOneBySlug($slug);
-        // dump($trick);
-        // die;
         $idTrick = $trick->getId();
+        $comments = $commentsRepository->findByTricks($idTrick, ['dateCreateCom' => "DESC"]);
+        $comment = new Comments();
+        $form = $this->createForm(CommentFormType::class, $comment);
+        $form->handleRequest($request);
 
-        $comments = $commentsRepository->findByTricks($idTrick);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (null === $this->getUser()) {
+                $this->addFlash(
+                    'notice', 
+                    'Vous devez être connecté pour ajouter un commentaire'
+                );
+
+                return $this->redirectToRoute('app_trick', ['slug' => $slug], Response::HTTP_SEE_OTHER);
+            }
+            $comment->setDateCreateCom(new \DateTime())
+            ->setActiveCom(1)
+            ->setTricks($trick)
+            ->setUsers($this->getUser());
+        $manager->persist($comment);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_trick', ['slug' => $slug]);
+        
+        }
 
         return $this->render('tricks/trick.html.twig', [
             'controller_name' => 'TricksController',
             'trick' => $trick,
             'comments' => $comments,
+            'formCreateComment' => $form->createView(),
         ]);
     }
 
@@ -129,14 +152,14 @@ class TricksController extends AbstractController
         $userTrick = $trick->getUsers();
         $idTrick = $userTrick->getId();
 
-    
-            $idUser = $user->getId();
-            $userRoles = $user->getRoles();
 
-            if ($idUser !== null && ($idUser == $idTrick || $user->isAdmin())) {
-                $tricksRepository->remove($trick, true);
-            }
-        
+        $idUser = $user->getId();
+        $userRoles = $user->getRoles();
+
+        if ($idUser !== null && ($idUser == $idTrick || $user->isAdmin())) {
+            $tricksRepository->remove($trick, true);
+        }
+
         return $this->redirectToRoute('app_home');
     }
 

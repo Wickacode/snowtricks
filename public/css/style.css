@@ -1,5 +1,5 @@
 /* Font */
-@import url("https://fonts.googleapis.com/css2?family=Hubballi&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap');
 
 
@@ -8,12 +8,12 @@
   --extra-dark-blue: #5585b5;
   --dark-blue: #53a8b6;
   --light-blue: #79c2d0;
-  --extra-light-blue: #bbe4e9;
+  --extra-light-blue: #bbe4e9; 
 }
 
 /* Général */
 * {
-  font-family: "Hubballi", sans-serif;
+  font-family: "Marcellus", serif;
   font-size: 15px;
   box-sizing: border-box;
   margin: 0;
@@ -22,7 +22,8 @@
 
 /* Text */
 h1,
-h2 {
+h2,
+h3 {
   font-family: "Sanchez", serif;
   font-weight: 400;
   font-style: normal;
@@ -101,6 +102,41 @@ i.fa-trash:hover {
 
 .w70 {
   width: 70%;
+}
+
+/* Submit btn */
+.submit-btn {
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+  z-index: 999;
+}
+
+.submit-btn:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: #78c7d2;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.submit-btn:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
 }
 
 /* Home Page */

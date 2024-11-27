@@ -29,56 +29,64 @@
 
 			{# Images supplémentaires #}
 			<!-- Image container -->
-			<div class="gallery-container dfull gap">
+			<div class="dfull gap">
 				{% for media in trick.medias %}
-
-					<div class="gallery-img-container">
-						{% if media.type == 'image' %}
+					{% if media.type == 'image' %}
+						<div class="gallery-img-container">
 							<img src="{{ asset(media.link) }}" alt="{{ media.link }}" class="gallery-img">
-						{% endif %}
-					</div>
-
+						</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 
-			<div class="gallery-container dfull">
+			<div class="dfull">
+
+				<div class="trick-description">
+					<p>{{trick.contentTrick}}</p>
+				</div>
 				{% for media in trick.medias %}
-
-					<div class="gallery-video-container">
-						{% if media.type == 'video' %}
+					{% if media.type == 'video' %}
+						<div class="gallery-video-container">
 							<iframe src="{{ media.link }}" class="gallery-video" width="560" height="315" title="Titre de la vidéo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-						{% endif %}
-					</div>
-
+						</div>
+					{% endif %}
 				{% endfor %}
 			</div>
 
-			<div class="trick-description">
-				<p>{{trick.contentTrick}}</p>
-			</div>
+
 		</div>
 	</section>
 
 	<section id="add-comment-section" class="dfull fdc">
-		<div class="comment-section dfull gap">
-			<textarea placeholder="Ajoutez votre commentaire ici..."></textarea>
-			<button class="submit-btn">Envoyer</button>
+
+		<div class="comment-section dfull fdc gap">
+			{% include('tricks/comments-trick.html.twig') %}
+			{% for message in app.flashes('notice') %}
+			<div class="alert alert-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
 		</div>
 
-		<div class="comments-list">
+		<div class="comments-list dfull gap fdc">
+			<h3>Commentaires</h3>
 			{% for comment in comments %}
-				<div class="comment dfull gap">
-
+				<div class="comment dfull">
 					<div class="avatar">
 						<img src="{{ asset(comment.users.avatar)}}" / alt="image">
 					</div>
 
 					<div class="content">
-					<div class="dfull gap">
-						<h4 class="comment-author">{{ comment.users.userName }}</h4>
-						<p> Crée le {{ comment.dateCreateCom | date('d-m-Y') }} </p>
-					</div>
-						<p class="comment-text">{{ comment.contentCom }}</p>
+						<div class=" comment-info dfull">
+							<h4 class="comment-author">{{ comment.users.userName }}</h4>
+							<p>
+								Le
+								{{ comment.dateCreateCom | date('d-m-Y') }}
+							</p>
+						</div>
+						<div class="comment-content">
+							<p class="comment-text">{{ comment.contentCom }}</p>
+						</div>
 					</div>
 
 				</div>
