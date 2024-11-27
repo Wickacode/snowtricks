@@ -17,10 +17,16 @@
 			{# Détails du trick #}
 			<div class="trick-details dfull gap">
 				<span>Crée le
-					{{trick.dateCreateTrick | date('d-m-Y') }}</span>
+					{{trick.dateCreateTrick | date('d-m-Y') }}
+					par
+					{{trick.users.username}} |</span>
 				<span>Groupe:
 					{{trick.categories.nameCat}}
 					|</span>
+				<span>Nombre de commentaires :
+					{{trick.comments|length}} |</span>
+				<span>Nombre de médias :
+					{{trick.medias|length}} |</span>
 				{% if trick.dateUpdateTrick != trick.dateCreateTrick %}
 					<span>Modifié le
 						{{ trick.dateUpdateTrick | date('d-m-Y') }}</span>
@@ -62,14 +68,17 @@
 		<div class="comment-section dfull fdc gap">
 			{% include('tricks/comments-trick.html.twig') %}
 			{% for message in app.flashes('notice') %}
-			<div class="alert alert-notice">
-				{{ message }}
-			</div>
-		{% endfor %}
+				<div class="alert alert-notice">
+					{{ message }}
+				</div>
+			{% endfor %}
 		</div>
 
 		<div class="comments-list dfull gap fdc">
 			<h3>Commentaires</h3>
+			{% if trick.comments|length == 0 %}
+			<span>Il n'y a aucun commentaire pour l'instant, ajoutez-en un ! </span>
+			{% else %}
 			{% for comment in comments %}
 				<div class="comment dfull">
 					<div class="avatar">
@@ -91,6 +100,7 @@
 
 				</div>
 			{% endfor %}
+			{% endif %}
 		</div>
 
 	</section>
