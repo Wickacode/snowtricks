@@ -45,7 +45,7 @@
 				{% endfor %}
 			</div>
 
-			<div class="dfull">
+			<div class="dfull video-details-container">
 
 				<div class="trick-description">
 					<p>{{trick.contentTrick}}</p>
@@ -102,6 +102,7 @@
 			{% endfor %}
 			{% endif %}
 		</div>
+		{% include('tricks/pagination.html.twig') %}
 
 	</section>
 

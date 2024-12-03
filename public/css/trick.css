@@ -74,11 +74,15 @@ div.gallery-img-container .gallery-img {
   object-fit: cover;
 }
 
+/* Section vidéos */
+div.video-details-container {
+  margin: 60px auto;
+}
+
 /* Section commentaires */
 section#add-comment-section div.comment-section {
   width: 100%;
   background-color: var(--extra-dark-blue);
-  margin: 40px auto;
   padding: 30px;
 }
 
@@ -126,4 +130,15 @@ section#add-comment-section div.comments-list .comment .content .comment-info {
 
 div.comment-content {
   padding: 10px 20px 0 20px;
+}
+
+/* Pagination */
+.page-item.active a {
+  font-weight: bold;
+  color: white;
+  background-color: #5e5f60;
+  padding: 10px;
+}
+img.chevronPaging {
+  width: 60px;
 }

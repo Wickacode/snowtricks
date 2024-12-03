@@ -39,9 +39,14 @@ navLinks.classList.toggle('active');
 	<body>
 		<header>
 			<nav>
-				<div class="logo">
+				<div class="logo dfull gap">
 					<img src="{{asset('img/logo.png')}}">
+					{% if app.user %}
+					<span class="user-name">Bienvenue
+						{{ app.user.username }} !</span>
+				{% endif %}
 				</div>
+				
 
 				<button class="menu-toggle" aria-label="Toggle navigation">
 					<i class="fas fa-bars"></i>
@@ -53,7 +58,7 @@ navLinks.classList.toggle('active');
 						<a href="{{path('app_home')}}">Accueil</a>
 					</li>
 					{% if app.user %}
-					<li>
+						<li>
 							<a href="{{path('app_profilUser')}}">Mon espace</a>
 						</li>
 						<li>
@@ -62,6 +67,7 @@ navLinks.classList.toggle('active');
 						<li>
 							<a href="{{path('app_logout')}}">Se déconnecter</a>
 						</li>
+
 					{% else %}
 
 						<li>
@@ -70,7 +76,7 @@ navLinks.classList.toggle('active');
 						<li>
 							<a href="{{path('app_register')}}">Inscription</a>
 						</li>
-						
+
 					{% endif %}
 
 				</ul>

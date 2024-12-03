@@ -16,7 +16,7 @@
 			{{ form_errors(registrationForm) }}
 
 			{{ form_start(registrationForm) }}
-			<form id="form" class="dfull fdc">
+			<div id="form" class="dfull fdc">
 				<h1 class="h3 mb-3 font-weight-normal">Inscription</h1>
 				<label for="registerUsername">Nom d'utilisateur</label><br/>
 				{{ form_widget(registrationForm.username) }}
@@ -36,7 +36,7 @@
 						<a href="{{ path('app_login') }}">Connectez-vous</a>
 					</p>
 				</div>
-			</form>
+			</div>
 			{{ form_end(registrationForm) }}
 		</section>
 	</section>

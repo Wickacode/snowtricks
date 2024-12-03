@@ -8,13 +8,19 @@
 		<section id="home-intro" class="dfull fdc">
 			<div id="intro-container" class="dfull gap w70">
 				<div class="intro-text">
-					<h1>Bienvenue sur <br /> <span>Snowtricks</span></h1>
-					<p>Je m'appelle Jimmy Sweat, et je suis un passionné de snowboard. Si tu veux découvrir ce sport incroyable, apprendre des figures stylées ou partager tes propres tricks, tu es au bon endroit !
-						<br/>Je te souhaite une excellente expérience sur mon site et j'ai hâte de voir tes contributions prochainement. À très bientôt sur les pistes !</p>
+					<h1>Bienvenue sur
+						<br/>
+						<span>Snowtricks</span>
+					</h1>
+					<div class="dfull gap">
+						<p>Je m'appelle Jimmy Sweat, et je suis un passionné de snowboard. Si tu veux découvrir ce sport incroyable, apprendre des figures stylées ou partager tes propres tricks, tu es au bon endroit !
+							<br/>Je te souhaite une excellente expérience sur mon site et j'ai hâte de voir tes contributions prochainement. À très bientôt sur les pistes !</p>
+						<div class="intro-img">
+							<img src="{{ asset('img/Jimmy.jpg')}}" / alt="image">
+						</div>
+					</div>
 				</div>
-				<div class="intro-img">
-					<img src="{{ asset('img/Jimmy.jpg')}}" / alt="image">
-				</div>
+
 			</div>
 
 			<div class="bottom-nav">
@@ -27,28 +33,28 @@
 
 		<section id="home-tricks-list" class="dfull fdc">
 			<h2>Tricks</h2>
-				<section id="home-tricks-container" class="dfull fw gap w70">
-				{% for trick in tricks %}	
+			<section id="home-tricks-container" class="dfull fw gap w70">
+				{% for trick in tricks %}
 					<div class="home-trick">
 						<div class="home-trick-img">
 							<img src="{{trick.mainImg}}" / alt="image">
 						</div>
 						<div class="home-trick-name dfull gap">
 							<a href="{{ path('app_trick', {'slug': trick.slug}) }}">{{ trick.titleTrick }}</a>
-							
-							 {% if (app.user) and app.user.isVerified == 1 and ((trick.users.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
-							<a href="{{ path('app_updateTrick', {'slug': trick.slug}) }}">
-								<i class="fa-solid fa-pencil"></i>
-							</a>
-							<a href="{{path('app_deleteTrick', {'slug': trick.slug})}}">
-								<i class="fa-solid fa-trash"></i>
-							</a>
+
+							{% if (app.user) and app.user.isVerified == 1 and ((trick.users.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
+								<a href="{{ path('app_updateTrick', {'slug': trick.slug}) }}">
+									<i class="fa-solid fa-pencil"></i>
+								</a>
+								<a href="{{path('app_deleteTrick', {'slug': trick.slug})}}">
+									<i class="fa-solid fa-trash"></i>
+								</a>
 							{% endif %}
 						</div>
 					</div>
-				{% endfor %}	
-				</section>
-			
+				{% endfor %}
+			</section>
+
 
 		</section>
 

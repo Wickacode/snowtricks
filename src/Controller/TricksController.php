@@ -21,42 +21,73 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class TricksController extends AbstractController
 {
     #[Route('/{slug}', name: 'app_trick')]
-    public function showTrick($slug, Request $request, TricksRepository $trickRepository, CommentsRepository $commentsRepository, EntityManagerInterface $manager): Response
-    {
-        $trick = $trickRepository->findOneBySlug($slug);
-        $idTrick = $trick->getId();
-        $comments = $commentsRepository->findByTricks($idTrick, ['dateCreateCom' => "DESC"]);
-        $comment = new Comments();
-        $form = $this->createForm(CommentFormType::class, $comment);
-        $form->handleRequest($request);
+public function showTrick(
+    $slug,
+    Request $request,
+    TricksRepository $trickRepository,
+    CommentsRepository $commentsRepository,
+    EntityManagerInterface $manager
+): Response {
+    // Récupération du trick par son slug
+    $trick = $trickRepository->findOneBySlug($slug);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (null === $this->getUser()) {
-                $this->addFlash(
-                    'notice', 
-                    'Vous devez être connecté pour ajouter un commentaire'
-                );
+    if (!$trick) {
+        throw $this->createNotFoundException('Le trick demandé n\'existe pas.');
+    }
 
-                return $this->redirectToRoute('app_trick', ['slug' => $slug], Response::HTTP_SEE_OTHER);
-            }
-            $comment->setDateCreateCom(new \DateTime())
+    $idTrick = $trick->getId();
+
+    // Pagination des commentaires
+    $page = $request->query->getInt('page', 1); // Page actuelle
+    $limit = 10; // Limite par page
+    $paginator = $commentsRepository->getPaginateComments($idTrick, $page, $limit);
+
+    $comments = $paginator->getIterator(); // Récupération des commentaires paginés
+    $pagesNumber = ceil(count($paginator) / $limit); // Calcul du nombre total de pages
+
+    // Nouveau commentaire
+    $comment = new Comments();
+    $form = $this->createForm(CommentFormType::class, $comment);
+    $form->handleRequest($request);
+
+    // Soumission du formulaire
+    if ($form->isSubmitted() && $form->isValid()) {
+        if (null === $this->getUser()) {
+            $this->addFlash(
+                'notice',
+                'Vous devez être connecté ou avoir validé votre compte pour ajouter un commentaire.'
+            );
+
+            return $this->redirectToRoute('app_trick', ['slug' => $slug], Response::HTTP_SEE_OTHER);
+        }
+
+        $comment->setDateCreateCom(new \DateTime())
             ->setActiveCom(1)
             ->setTricks($trick)
             ->setUsers($this->getUser());
+
         $manager->persist($comment);
         $manager->flush();
 
-        return $this->redirectToRoute('app_trick', ['slug' => $slug]);
-        
-        }
-
-        return $this->render('tricks/trick.html.twig', [
-            'controller_name' => 'TricksController',
-            'trick' => $trick,
-            'comments' => $comments,
-            'formCreateComment' => $form->createView(),
+        // Redirection après ajout du commentaire pour éviter une resoumission du formulaire
+        return $this->redirectToRoute('app_trick', [
+            'slug' => $slug,
+            'page' => $page,
+            'pagesNumber' => $pagesNumber,
         ]);
     }
+
+    // Rendu de la vue
+    return $this->render('tricks/trick.html.twig', [
+        'controller_name' => 'TricksController',
+        'trick' => $trick,
+        'comments' => $comments,
+        'formCreateComment' => $form->createView(),
+        'page' => $page, // Page actuelle
+        'pagesNumber' => $pagesNumber, // Nombre total de pages
+    ]);
+}
+
 
     #[Route('/trick/addTrick', name: 'app_newTrick')]
     public function addTrick(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response

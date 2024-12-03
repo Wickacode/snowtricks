@@ -1,0 +1,28 @@
+<div class="pagination">
+    <ul class="dfull gap">
+        <!-- Lien vers la page précédente -->
+        {% if page > 1 %}
+            <li class="page-item">
+                <a href="?page={{ page - 1 }}">
+                    <img class="chevronPaging" src="{{ asset('img/chevron-gauche.png') }}" alt="Page précédente">
+                </a>
+            </li>
+        {% endif %}
+
+        <!-- Liens pour chaque page -->
+        {% for i in 1..pagesNumber %}
+            <li class="page-item {% if i == page %}active{% endif %}">
+                <a href="?page={{ i }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+
+        <!-- Lien vers la page suivante -->
+        {% if page < pagesNumber %}
+            <li class="page-item">
+                <a href="?page={{ page + 1 }}">
+                    <img class="chevronPaging chevronRight" src="{{ asset('img/chevron-droit.png') }}" alt="Page suivante">
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
