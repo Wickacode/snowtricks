@@ -35,28 +35,28 @@
 			<h2>Tricks</h2>
 			<section id="home-tricks-container" class="dfull fw gap w70">
 				{% for trick in tricks %}
-					<div class="home-trick">
+					<div class="home-trick trick">
 						<div class="home-trick-img">
-							<img src="{{trick.mainImg}}" / alt="image">
+							<img src="{{ trick.mainImg }}" alt="image">
 						</div>
 						<div class="home-trick-name dfull gap">
 							<a href="{{ path('app_trick', {'slug': trick.slug}) }}">{{ trick.titleTrick }}</a>
-
-							{% if (app.user) and app.user.isVerified == 1 and ((trick.users.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
-								<a href="{{ path('app_updateTrick', {'slug': trick.slug}) }}">
-									<i class="fa-solid fa-pencil"></i>
-								</a>
-								<a href="{{path('app_deleteTrick', {'slug': trick.slug})}}">
-									<i class="fa-solid fa-trash"></i>
-								</a>
-							{% endif %}
 						</div>
 					</div>
 				{% endfor %}
 			</section>
 
-
 		</section>
+		{% if tricks | length > 10 %}
+			<div>
+				<button id="loadMoreTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Charger plus de tricks</button>
+				<button id="loadLessTrick" type="submit" name="loadNextTrick" class="btnValidate btnNewFigure mt-4">Cacher tricks</button>
+			</div>
+		{% endif %}
 
 	</main>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/load.js') }}"></script>
 {% endblock %}

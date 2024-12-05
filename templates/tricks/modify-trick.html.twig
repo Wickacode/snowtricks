@@ -1,45 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nom du trick
+{% block title %}Ajouter une figure
 {% endblock %}
 
 {% block body %}
+	<section id="form-page" class="dfull fdc">
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-<section id="updateArticle" class="dfull fdc gap vh">
-    <h1>Modifier l'Article</h1>
-    
-    <form action="/modifier-article" method="post" enctype="multipart/form-data" class="dfull fdc gap">
-        <!-- Modification du titre -->
-        <div class="form-group">
-            <label for="titre">Titre de l'article :</label>
-            <input type="text" id="titre" name="titre" value="Titre actuel de l'article">
-        </div>
+		<section id="form-container" class="dfull">
+			{{ form_errors(addTrickForm) }}
+			{{ form_start(addTrickForm) }}
+			{% if addTrickForm.titleTrick.vars.errors|length > 0 %}
+				<div class="error">
+					{% for error in addTrickForm.titleTrick.vars.errors %}
+						<p>{{ error.message }}</p>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div id="form" class="dfull fdc">
+				<h2>Ajouter une figure</h2>
+				<label for="nameTrick" class="labelForm">Nom de la figure</label><br/>
+				{{ form_widget(addTrickForm.titleTrick) }}
+				<label for="contentTrick" class="labelForm">Description de la figure</label><br/>
+				{{ form_widget(addTrickForm.contentTrick) }}
+				<label for="catTrick" class="labelForm">Catégorie</label><br/>
+				{{ form_widget(addTrickForm.categories) }}
+				<label for="mainImg" class="labelForm">Image principale</label><br/>
+				{{ form_widget(addTrickForm.mainImg) }}
+				<label for="moreImg" class="labelForm">Images secondaires</label><br/>
+				{{ form_widget(addTrickForm.mediaImages) }}
+				<label for="video" class="labelForm">Vidéo</label><br/>
+				{{ form_widget(addTrickForm.mediaVideo) }}
 
-        <!-- Modification de l'image principale -->
-        <div class="form-group">
-            <label for="image-principale">Image principale :</label>
-            <input type="file" id="image-principale" name="image-principale" accept="image/*">
-            <div>
-                <img src="image-actuelle.jpg" alt="Image principale" class="image-preview">
-            </div>
-        </div>
-
-        <!-- Ajout d'images supplémentaires -->
-        <div class="form-group">
-            <label for="images-secondaires">Ajouter d'autres images :</label>
-            <input type="file" id="images-secondaires" name="images-secondaires[]" accept="image/*" multiple>
-        </div>
-
-        <!-- Ajout de vidéos -->
-        <div class="form-group">
-            <label for="videos">Ajouter des vidéos :</label>
-            <input type="file" id="videos" name="videos[]" accept="video/*" multiple>
-        </div>
-
-        <!-- Bouton de soumission -->
-        <div class="form-actions">
-            <button type="submit">Mettre à jour l'article</button>
-        </div>
-    </form>
-</div>
+				<button type="submit" class="submit-button">Ajouter</button>
+			</div>
+			{{ form_end(addTrickForm) }}
+		</section>
+	</section>
 {% endblock %}

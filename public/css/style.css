@@ -265,6 +265,38 @@ section#home-tricks-list
   color: rgb(62, 61, 61);
 }
 
+/* Upload more */
+.disabled,
+section.trick {
+  display: none;
+}
+
+#loadLessTrick {
+  display: none;
+}
+
+.btnValidate {
+  color: #fff;
+  background-color: #ef8923;
+  border: 1px SOLID transparent;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.btnValidate:hover {
+  background-color: #cf6903;
+  text-decoration: none;
+}
+
+.btnNewFigure {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 /* Update article  */
 section#updateArticle {
   background-color: #4baf3b;
