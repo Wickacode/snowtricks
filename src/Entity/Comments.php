@@ -6,6 +6,7 @@ use App\Repository\CommentsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: CommentsRepository::class)]
 class Comments
 {
@@ -23,7 +24,7 @@ class Comments
     #[ORM\Column]
     private ?bool $isActiveCom = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\ManyToOne(inversedBy: 'comments', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Tricks $tricks = null;
 

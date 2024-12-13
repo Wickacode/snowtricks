@@ -12,28 +12,26 @@
 				<img src="{{ asset('img/bg-blur.png')}}" / alt="image">
 			</div>
 
-			<form id="form" class="dfull fdc">
+			{{ form_start(formUpdateUser) }}
+			<div id="form" class="dfull fdc">
 				<h2>Gérer votre compte</h2>
-				<label for="firstname" class="dfull fdc">
-					<label for="pseudo">Modifier votre pseudo</label>
-					<span>Pseudo actuel : </span>
-					<input type="text" id="pseudo" name="pseudo" placeholder="Nouveau pseudo" required>
-				</label>
+				<label for="pseudo" class="dfull fdc">Modifier votre pseudo</label><br/>
+				{{ form_widget(formUpdateUser.username) }}
+				{{ form_errors(formUpdateUser.username) }}
+
+				<label for="email" class="dfull fdc">Modifier votre e-mail</label><br/>
+				{{ form_widget(formUpdateUser.email) }}
+				{{ form_errors(formUpdateUser.email) }}
 
 
-				<label for="firstname" class="dfull fdc">
-					<label for="pseudo">Modifier votre e-mail</label>
-					<span>Email actuel : </span>
-					<input type="email" id="email" name="email" placeholder="Nouvelle adresse mail" required>
-				</label>
-
-				<div class="dfull fdc">
-					<a href="{{path('app_modifyPassword')}}">Modifier votre mot de passe</a>
-				</div>
+				<label for="avatar" class="dfull fdc">Modifier votre avatar</label><br/>
+				{{ form_widget(formUpdateUser.avatar) }}
+				{{ form_errors(formUpdateUser.avatar) }}
 
 				<button type="submit" class="submit-button">Valider les modifications</button>
 
-			</form>
+			</div>
+			{{ form_end(formUpdateUser) }}
 		</section>
 
 	</section>

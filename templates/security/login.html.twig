@@ -1,48 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion
+{% block title %}Log in!
 {% endblock %}
 
 {% block body %}
-
 	<section id="form-page" class="dfull">
 
 		<section id="form-container" class="dfull">
 			<div>
 				<img src="{{ asset('img/form2.jpg')}}" / alt="image">
 			</div>
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
+			{% endif %}
+			<form id="form"  class="dfull fdc" method="post">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
 
-			<form id="form" class="dfull fdc">
-				<h2>Connexion</h2>
-				<label for="firstname">
-					<input type="text" id="firstname" name="firstname" placeholder="Pseudo" required>
-				</label>
+				{% if app.user %}
+					<div class="mb-3">
+						Vous êtes connecté en tant que
+						{{ app.user.username }},
+						<a href="{{ path('app_logout') }}">Se déconnecter</a>
+					</div>
+				{% else %}
 
+				<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+				<label for="username">Email</label>
+				<input type="email" value="{{ last_username }}" name="_username" id="username" class="formInput" autocomplete="email" placeholder="Adresse mail" required autofocus>
+				<label for="password">Mot de passe</label>
+				<input type="password" name="_password" id="password" class="formInput" autocomplete="current-password" placeholder="Mot de passe" required>
 
-				<label for="email">
-					<input type="email" id="email" name="email" placeholder="Adresse email" required>
-				</label>
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-				<label for="password">
-					<input type="password" id="password" name="password" placeholder="Mot de passe" required>
-				</label>
+				<button type="submit" class="btn btn-lg btn-primary">
+					Se connecter
+				</button>
 
 				<div class="forgot-password">
 					<a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
 				</div>
-
-
-				<button type="submit" class="submit-button">Se connecter</button>
-
-
-				<div class="login-link">
-					<p>Pas encore inscrit ?
-						<a href="{{ path('app_register') }}">Inscrivez-vous</a>
-					</p>
-				</div>
 			</form>
+            {% endif %}
 		</section>
-
 	</section>
 
 {% endblock %}

@@ -1,0 +1,144 @@
+section#single-trick-page div.single-trick {
+  width: 100%;
+}
+section#single-trick-page div.single-trick div.img-container {
+  height: 80vh;
+}
+
+section#single-trick-page div.single-trick div.img-container h1 {
+  font-size: 12em;
+  position: absolute;
+  text-shadow: 4px 3px 0 #7a7a7a;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  animation: focus-in-expand-fwd 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes focus-in-expand-fwd {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-800px);
+    transform: translateZ(-800px);
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-filter: blur(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+section#single-trick-page div.single-trick .main-img {
+  width: 100%;
+  height: 80vh;
+  object-fit: cover;
+}
+
+section#single-trick-page div.trick-details {
+  background-color: black;
+  padding: 20px;
+  margin: auto;
+  font-weight: 600;
+  color: var(--extra-light-blue);
+}
+
+section#single-trick-page div.single-trick div.others-medias {
+  margin: 20px auto;
+  overflow: hidden;
+  width: 98vw;
+}
+
+section#single-trick-page div.single-trick div.others-medias img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
+}
+
+section#single-trick-page div.single-trick p {
+  width: 70%;
+  margin: 50px auto;
+}
+
+/* Section slider d'images supplémentaires */
+div.gallery-img-container {
+  width: 30%;
+}
+
+div.gallery-img-container .gallery-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Section vidéos */
+div.video-details-container {
+  margin: 60px auto;
+}
+
+/* Section commentaires */
+section#add-comment-section div.comment-section {
+  width: 100%;
+  background-color: var(--extra-dark-blue);
+  padding: 30px;
+}
+
+section#add-comment-section div.comment-section textarea {
+  border: none;
+  padding: 10px;
+  height: 150px;
+  width: 500px;
+}
+
+section#add-comment-section div.comments-list {
+  width: 70%;
+  padding: 20px;
+}
+
+section#add-comment-section h3 {
+  font-size: 2.5em;
+  margin: 30px 0;
+}
+
+section#add-comment-section div.comments-list .comment {
+  border-radius: 4px;
+  background-color: #efeeee;
+  justify-content: start;
+  width: 60%;
+}
+
+section#add-comment-section div.comments-list .comment .avatar img {
+  width: 100px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+section#add-comment-section div.comments-list .comment .content {
+  padding: 15px 0;
+  width: 100%;
+}
+
+section#add-comment-section div.comments-list .comment .content .comment-info {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--extra-dark-blue);
+  padding: 0 20px 10px 20px;
+}
+
+div.comment-content {
+  padding: 10px 20px 0 20px;
+}
+
+/* Pagination */
+.page-item.active a {
+  font-weight: bold;
+  color: white;
+  background-color: #5e5f60;
+  padding: 10px;
+}
+img.chevronPaging {
+  width: 30px;
+}

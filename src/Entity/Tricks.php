@@ -7,8 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TricksRepository::class)]
+#[UniqueEntity(fields: ['titleTrick'], message: 'Une figure avec ce nom existe déjà.')]
 class Tricks
 {
     #[ORM\Id]
@@ -16,7 +20,8 @@ class Tricks
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 250)]
+    #[ORM\Column(length: 250, unique: true)]
+    #[Assert\NotBlank]
     private ?string $titleTrick = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -34,7 +39,7 @@ class Tricks
     #[ORM\Column]
     private ?bool $isActiveTrick = null;
 
-    #[ORM\Column(length: 250)]
+    #[ORM\Column(length: 250, unique: true)]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'tricks')]
@@ -48,13 +53,13 @@ class Tricks
     /**
      * @var Collection<int, Medias>
      */
-    #[ORM\OneToMany(targetEntity: Medias::class, mappedBy: 'tricks', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Medias::class, mappedBy: 'tricks', orphanRemoval: true, cascade: ['persist'] )]
     private Collection $medias;
 
     /**
      * @var Collection<int, Comments>
      */
-    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'tricks', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'tricks', orphanRemoval: true, cascade: ['persist'])]
     private Collection $comments;
 
     public function __construct()
@@ -76,6 +81,8 @@ class Tricks
     public function setTitleTrick(string $titleTrick): static
     {
         $this->titleTrick = $titleTrick;
+        $slugger = new AsciiSlugger('fr');
+        $this->slug = $slugger->slug($titleTrick);
 
         return $this;
     }

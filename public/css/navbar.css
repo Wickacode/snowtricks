@@ -19,6 +19,11 @@ nav .logo img {
     width: 100px;
 }
 
+nav .logo {
+    text-transform: uppercase;
+    color: var(--extra-light-blue);
+}
+
 nav .menu-toggle {
     display: none; /* Caché par défaut */
     background: none;

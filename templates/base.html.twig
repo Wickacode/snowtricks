@@ -10,6 +10,8 @@
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
 		<link rel="stylesheet" href="{{asset("css/style.css")}}"/> {% block stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="{{asset("css/user.css")}}"/> {% block user_stylesheets %}{% endblock %}
+		<link rel="stylesheet" href="{{asset("css/trick.css")}}"/> {% block trick_stylesheets %}{% endblock %}
 		<link rel="stylesheet" href="{{asset("css/forms.css")}}"/> {% block form_stylesheets %}{% endblock %}
 		<link rel="stylesheet" href="{{asset("css/navbar.css")}}"/> {% block navbar_stylesheets %}{% endblock %}
 		<link rel="stylesheet" href="{{asset("css/footer.css")}}"/> {% block footer_stylesheets %}{% endblock %}
@@ -37,9 +39,14 @@ navLinks.classList.toggle('active');
 	<body>
 		<header>
 			<nav>
-				<div class="logo">
+				<div class="logo dfull gap">
 					<img src="{{asset('img/logo.png')}}">
+					{% if app.user %}
+					<span class="user-name">Bienvenue
+						{{ app.user.username }} !</span>
+				{% endif %}
 				</div>
+				
 
 				<button class="menu-toggle" aria-label="Toggle navigation">
 					<i class="fas fa-bars"></i>
@@ -47,13 +54,31 @@ navLinks.classList.toggle('active');
 				</button>
 
 				<ul>
-					<li> <a href="{{path('app_home')}}">Accueil</a> </li>
-					<li> <a href="{{path('app_login')}}">Connexion</a> </li>
-					<li> <a href="{{path('app_register')}}">Inscription</a> </li>
-				</ul>
+					<li>
+						<a href="{{path('app_home')}}">Accueil</a>
+					</li>
+					{% if app.user %}
+						<li>
+							<a href="{{path('app_profilUser')}}">Mon espace</a>
+						</li>
+						<li>
+							<a href="{{path('app_newTrick')}}">Ajouter une figure</a>
+						</li>
+						<li>
+							<a href="{{path('app_logout')}}">Se déconnecter</a>
+						</li>
 
-				<ul>
-				<li><a href="{{path('app_updateUser')}}">Modifier son profil</a></li>				
+					{% else %}
+
+						<li>
+							<a href="{{path('app_login')}}">Connexion</a>
+						</li>
+						<li>
+							<a href="{{path('app_register')}}">Inscription</a>
+						</li>
+
+					{% endif %}
+
 				</ul>
 			</nav>
 		</header>
