@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter une figure
+{% block title %}Mettre à jour une figure
 {% endblock %}
 
 {% block body %}
@@ -12,33 +12,34 @@
 		{% endfor %}
 
 		<section id="form-container" class="dfull">
-			{{ form_errors(addTrickForm) }}
-			{{ form_start(addTrickForm) }}
-			{% if addTrickForm.titleTrick.vars.errors|length > 0 %}
+			{{ form_errors(trickForm) }}
+			{{ form_start(trickForm) }}
+			{% if trickForm.titleTrick.vars.errors|length > 0 %}
 				<div class="error">
-					{% for error in addTrickForm.titleTrick.vars.errors %}
+					{% for error in trickForm.titleTrick.vars.errors %}
 						<p>{{ error.message }}</p>
 					{% endfor %}
 				</div>
 			{% endif %}
 			<div id="form" class="dfull fdc">
-				<h2>Ajouter une figure</h2>
+				<h2>Mettre à jour une figure</h2>
 				<label for="nameTrick" class="labelForm">Nom de la figure</label><br/>
-				{{ form_widget(addTrickForm.titleTrick) }}
+				{{ form_widget(trickForm.titleTrick) }}
 				<label for="contentTrick" class="labelForm">Description de la figure</label><br/>
-				{{ form_widget(addTrickForm.contentTrick) }}
+				{{ form_widget(trickForm.contentTrick) }}
 				<label for="catTrick" class="labelForm">Catégorie</label><br/>
-				{{ form_widget(addTrickForm.categories) }}
-				<label for="mainImg" class="labelForm">Image principale</label><br/>
-				{{ form_widget(addTrickForm.mainImg) }}
+				{{ form_widget(trickForm.categories) }}
+				<label for="mainImg" class="labelForm">Image actuelle :</label><br/>
+				<img src="{{asset(trick.mainImg)}}" / alt="image" class="main-img main-img-update">
+				{{ form_widget(trickForm.mainImg) }}
 				<label for="moreImg" class="labelForm">Images secondaires</label><br/>
-				{{ form_widget(addTrickForm.mediaImages) }}
+				{{ form_widget(trickForm.mediaImages) }}
 				<label for="video" class="labelForm">Vidéo</label><br/>
-				{{ form_widget(addTrickForm.mediaVideo) }}
+				{{ form_widget(trickForm.mediaVideo) }}
 
-				<button type="submit" class="submit-button">Ajouter</button>
+				<button type="submit" class="submit-button">Confirmer</button>
 			</div>
-			{{ form_end(addTrickForm) }}
+			{{ form_end(trickForm) }}
 		</section>
 	</section>
 {% endblock %}

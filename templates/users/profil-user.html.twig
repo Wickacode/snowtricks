@@ -5,17 +5,83 @@
 
 {% block body %}
 
-<section id="espace-user" class="dfull gap vh">
-    <div class="dfull">
-        <a href="{{path('app_updateUser')}}">Modifier son profil</a>
-    </div>
+	<section id="espace-user" class="dfull gap">
+		<div class="info-user">
+			<div class="dfull fdc">
+				<span>
+					{{ app.user.username }}
+				</span>
 
-    <div class="dfull">
-        <a href="#">Mes tricks</a>
-    </div>
-</section>
+				<img class="rounded-circle" src="{{ asset(app.user.avatar) }}" alt="Avatar" width="110">
 
-	
+				<span>
+					{{ app.user.email }}
+				</span>
+
+				<div class="dfull fdc">
+					<h3>Date d'inscription :</h3>
+					<span>{{ app.user.dateCreateUser | date('d-m-Y')  }}
+					</span>
+				</div>
+			</div>
+		</div>
 
 
-{% endblock %}
+		<div class="dfull fdc gap">
+			<h2>Modifier votre compte</h2>
+			<div class="dfull fdc gap user-page-options">
+				<button>Modifier vos informations</button>
+				<button>Modifier votre mot de passe</button>
+				<button>Afficher vos commentaires</button>
+			</div>
+		</div>
+
+	</section>
+	<section class="dfull gap fdc">
+		<div class="dfull fdc gap">
+			<h2 class="ta">Liste des tricks crées</h2>
+			<div class="user-trick-container dfull gap">
+				{% for trick in app.user.tricks %}
+					<div class="trick-user dfull fdc gap">
+						<div class="user-trick-img">
+							<img src="{{ asset(trick.mainImg) }}" alt="snowboarder" class="imgTrickUser">
+						</div>
+						<div>
+							<h5 class="card-title">{{ trick.titleTrick }}</h5>
+							<span class="text-muted">Ajouté le:
+								{{ trick.dateCreateTrick | date('d-m-Y') }}</span><br/>
+							<span class="text-muted">Modifié le:
+								{{ trick.dateUpdateTrick | date('d-m-Y') }}</span>
+							<div class="mt-3">
+								<div class="text-center">
+									<button type="button" onclick="window.open('{{ path('app_trick', { 'slug': trick.slug }) }}')" target="_blank" class="btnValidate">Consulter</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+
+		<div class="dfull fdc gap">
+			<h2 class="ta">Liste des vos commentaires</h2>
+			<div class="dfull gap fw">
+			{% for comment in app.user.comments %}
+				<div class="comment-user">
+					<div>
+						<p class="card-title">{{ comment.contentCom}}</p>
+						<span class="text-muted">Ajouté le:
+							{{ comment.dateCreateCom | date('d-m-Y') }}</span><br/>
+						<div class="text-center">
+							<button type="button" onclick="window.open('{{ path('app_trick', { 'slug': comment.tricks.slug }) }}')" target="_blank" class="btnValidate">Consulter</button>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+
+	</div>
+
+</section>{% endblock %}

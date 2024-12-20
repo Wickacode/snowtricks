@@ -33,6 +33,8 @@ class TricksFormType extends AbstractType
             ))
             ->add('mainImg', FileType::class, array(
                 'required' => false,
+                'data_class' => null,
+                'mapped' => false,
                 'attr' => array(
                     'class' => 'formInput',
                     'placeholder' => 'Image principale'
@@ -41,6 +43,7 @@ class TricksFormType extends AbstractType
             ->add('mediaImages', FileType::class, array(
                 'mapped' => false,
                 'required' => false,
+                'data_class' => null,
                 'multiple' => true,
                 'attr' => array(
                     'class' => 'formInput',
@@ -50,6 +53,7 @@ class TricksFormType extends AbstractType
             ->add('mediaVideo', UrlType::class, array(
                 'mapped' => false,
                 'required' => false,
+                'data_class' => null,
                 'attr' => array(
                     'class' => 'formInput',
                     'placeholder' => 'Vidéo'

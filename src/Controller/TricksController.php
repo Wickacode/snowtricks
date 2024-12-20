@@ -158,17 +158,62 @@ public function showTrick(
 
         return $this->render('tricks/addTrick.html.twig', [
             'controller_name' => 'TricksController',
-            'addTrickForm' => $form,
+            'trickForm' => $form,
         ]);
     }
 
     #[Route('/trick/updateTrick/{slug}', name: 'app_updateTrick')]
-    public function updateTrick($slug): Response
-    {
-        return $this->render('tricks/modify-trick.html.twig', [
-            'controller_name' => 'TricksController',
-        ]);
+public function updateTrick($slug, Request $request, TricksRepository $tricksRepository, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+{
+    $trick = $tricksRepository->findOneBy(['slug' => $slug]);
+
+    // Récupérer l'image principale actuelle
+    $precedentMainImg = $trick->getMainImg();
+    $form = $this->createForm(TricksFormType::class, $trick);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $newMainImg = $form->get('mainImg')->getData();
+        $dateUpdateTrick = new \DateTime();
+        $trick->setDateUpdateTrick($dateUpdateTrick);
+
+        if ($newMainImg !== null) {
+            $originalMainImage = pathinfo($newMainImg->getClientOriginalName(), PATHINFO_FILENAME);
+            // Nom de fichier sécurisé
+            $safeMainImage = $slugger->slug($originalMainImage);
+            $mainImageFilename = 'img/upload/' . $safeMainImage . '-' . uniqid() . '.' . $newMainImg->guessExtension();
+            try {
+                $newMainImg->move(
+                    $this->getParameter('images_directory'),
+                    $mainImageFilename
+                );
+            } catch (FileException $e) {
+                // Gérer l'exception si nécessaire
+            }
+
+            $trick->setMainImg($mainImageFilename);
+        } else {
+            // Si aucune nouvelle image n'est téléchargée, conserver l'image précédente
+            if ($precedentMainImg !== null) {
+                $trick->setMainImg($precedentMainImg);
+            } else {
+                // Si l'image précédente est également null, gérer cela selon votre logique métier
+                $trick->setMainImg(''); // ou une valeur par défaut
+            }
+        }
+
+        // Sauvegarde des modifications
+        $entityManager->persist($trick); // Marque l'entité comme "à sauvegarder"
+        $entityManager->flush(); // Exécute la sauvegarde dans la base de données
     }
+
+    return $this->render('tricks/modify-trick.html.twig', [
+        'controller_name' => 'TricksController',
+        'trickForm' => $form->createView(),
+        'trick' => $trick,
+    ]);
+}
+
 
     #[Route('/deleteTrick/{slug}', name: 'app_deleteTrick')]
     public function deleteTrick($slug, Request $request, TricksRepository $tricksRepository): Response

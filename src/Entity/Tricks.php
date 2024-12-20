@@ -27,7 +27,7 @@ class Tricks
     #[ORM\Column(type: Types::TEXT)]
     private ?string $contentTrick = null;
 
-    #[ORM\Column(length: 250)]
+    #[ORM\Column(length: 250, nullable: true)]
     private ?string $mainImg = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
