@@ -33,8 +33,29 @@
 				<img src="{{asset(trick.mainImg)}}" / alt="image" class="main-img main-img-update">
 				{{ form_widget(trickForm.mainImg) }}
 				<label for="moreImg" class="labelForm">Images secondaires</label><br/>
-				{{ form_widget(trickForm.mediaImages) }}
+				<div class="dfull fw gap">
+					{% for image in trick.medias %}
+						{% if image.type == 'image' %}
+							<div class="dfull fdc">
+								<img src="{{asset(image.link)}}" / alt="image" class="main-img main-img-update">
+								<a href="{{ path('app_deleteImg', {'slug': trick.slug,'id': image.id}) }}">
+									<i class="fa-solid fa-trash">Supprimer</i>
+								</a>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
 				<label for="video" class="labelForm">Vidéo</label><br/>
+				{% for video in trick.medias %}
+					{% if video.type == 'video' %}
+						<div class="dfull fdc">
+							<iframe src="{{video.link}}" / alt="video"></iframe>
+							<a href="{{ path('app_deleteVideo', {'slug': trick.slug,'id': video.id}) }}">
+								<i class="fa-solid fa-trash">Supprimer</i>
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
 				{{ form_widget(trickForm.mediaVideo) }}
 
 				<button type="submit" class="submit-button">Confirmer</button>

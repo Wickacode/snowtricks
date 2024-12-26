@@ -16,6 +16,15 @@ class MediasRepository extends ServiceEntityRepository
         parent::__construct($registry, Medias::class);
     }
 
+    public function remove(Medias $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
+
     //    /**
     //     * @return Medias[] Returns an array of Medias objects
     //     */

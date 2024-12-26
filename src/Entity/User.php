@@ -74,9 +74,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'users', orphanRemoval: true)]
     private Collection $comments;
 
-    #[ORM\Column(length: 255)]
-    private ?string $username = null;
-
     public function __construct()
     {
         $this->tricks = new ArrayCollection();

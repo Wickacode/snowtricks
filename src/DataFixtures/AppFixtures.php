@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
         $users = [];
         $categories = [];
         $categoriesName = ['Grab', 'Rotation', 'Flip', 'Rotation désaxée', 'Slide', 'One foot trick', 'Old school'];
-        $tricksName = ['Mute', 'Indy', 'Melon grab', 'Rodeo', '360', '720', 'Clippler', 'Misty', 'Tail slide', 'Method air'];
+        $tricksName = ['Mute', 'Indy', 'Melon grab', 'Rodeo', '360', '720', 'Clipper', 'Misty', 'Tail slide', 'Method air'];
         $tricksContent = [
             "Un tour complet (360 degrés) dans les airs",
             "Salto arrière dans les airs",

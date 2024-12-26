@@ -43,10 +43,10 @@
 
 							<a href="{{ path('app_trick', {'slug': trick.slug}) }}">{{ trick.titleTrick }}</a>
 							{% if (app.user) and app.user.isVerified == 1 and ((trick.users.id == app.user.id) or (app.user.roles.0 == "ROLE_ADMIN")) %}
-								<a class="iconeHome mb-2" href="{{ path('app_updateTrick', {'slug': trick.slug}) }}">
+								<a href="{{ path('app_updateTrick', {'slug': trick.slug}) }}">
 									<i class="fa-solid fa-pencil"></i>
 								</a>
-								<a class="iconeHome mb-2 mr-2" href="{{ path('app_deleteTrick', {'slug': trick.slug}) }}">
+								<a href="{{ path('app_deleteTrick', {'slug': trick.slug}) }}">
 									<i class="fa-solid fa-trash"></i>
 								</a>
 							{% endif %}

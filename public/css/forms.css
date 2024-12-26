@@ -1,5 +1,5 @@
 section#form-page {
-  height: 100vh;
+  min-height: 100vh;
 }
 section#form-container {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
