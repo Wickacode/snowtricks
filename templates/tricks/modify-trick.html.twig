@@ -36,10 +36,11 @@
 				<div class="dfull fw gap">
 					{% for image in trick.medias %}
 						{% if image.type == 'image' %}
-							<div class="dfull fdc">
-								<img src="{{asset(image.link)}}" / alt="image" class="main-img main-img-update">
+							<div class="dfull fdc more-img-container">
+								<img src="{{asset(image.link)}}" / alt="image" class="more-img">
 								<a href="{{ path('app_deleteImg', {'slug': trick.slug,'id': image.id}) }}">
-									<i class="fa-solid fa-trash">Supprimer</i>
+									<i class="fa-solid fa-trash">
+										Supprimer</i>
 								</a>
 							</div>
 						{% endif %}
@@ -58,7 +59,7 @@
 				{% endfor %}
 				{{ form_widget(trickForm.mediaVideo) }}
 
-				<button type="submit" class="submit-button">Confirmer</button>
+				<button type="submit" class="submit-btn">Confirmer</button>
 			</div>
 			{{ form_end(trickForm) }}
 		</section>

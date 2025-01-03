@@ -61,6 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = null;
 
+    private \DateTimeInterface $tokenExpiration;
 
     /**
      * @var Collection<int, Tricks>
@@ -123,7 +124,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isAdmin(): bool
     {
-        return in_array('ROLE_ADMIN',$this->getRoles() );
+        return in_array('ROLE_ADMIN', $this->getRoles());
     }
 
     /**
@@ -279,7 +280,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    
+
     public function getPasswordConfirm(): ?string
     {
         return $this->passwordConfirm;
@@ -303,4 +304,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
+    public function getTokenExpiration(): \DateTimeInterface
+    {
+        return $this->tokenExpiration;
+    }
+
+    public function setTokenExpiration(\DateTimeInterface $tokenExpiration): self
+    {
+        $this->tokenExpiration = $tokenExpiration;
+        return $this;
+    }
+
 }

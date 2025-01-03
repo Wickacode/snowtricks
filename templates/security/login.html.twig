@@ -10,10 +10,15 @@
 			<div>
 				<img src="{{ asset('img/form2.jpg')}}" / alt="image">
 			</div>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
 			{% if error %}
 				<div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
 			{% endif %}
-			<form id="form"  class="dfull fdc" method="post">
+			<form id="form" class="dfull fdc" method="post">
 				{% if error %}
 					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 				{% endif %}
@@ -26,23 +31,23 @@
 					</div>
 				{% else %}
 
-				<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
-				<label for="username">Email</label>
-				<input type="email" value="{{ last_username }}" name="_username" id="username" class="formInput" autocomplete="email" placeholder="Adresse mail" required autofocus>
-				<label for="password">Mot de passe</label>
-				<input type="password" name="_password" id="password" class="formInput" autocomplete="current-password" placeholder="Mot de passe" required>
+					<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+					<label for="username">Email</label>
+					<input type="email" value="{{ last_username }}" name="_username" id="username" class="formInput" autocomplete="email" placeholder="Adresse mail" required autofocus>
+					<label for="password">Mot de passe</label>
+					<input type="password" name="_password" id="password" class="formInput" autocomplete="current-password" placeholder="Mot de passe" required>
 
-				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-				<button type="submit" class="btn btn-lg btn-primary">
-					Se connecter
-				</button>
+					<button type="submit" class="btn btn-lg btn-primary">
+						Se connecter
+					</button>
 
-				<div class="forgot-password">
-					<a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
-				</div>
-			</form>
-            {% endif %}
+					<div class="forgot-password">
+						<a href="{{ path('app_forgot_password') }}">Mot de passe oublié ?</a>
+					</div>
+				</form>
+			{% endif %}
 		</section>
 	</section>
 

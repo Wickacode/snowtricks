@@ -30,9 +30,9 @@
 		<div class="dfull fdc gap">
 			<h2>Modifier votre compte</h2>
 			<div class="dfull fdc gap user-page-options">
-				<button>Modifier vos informations</button>
-				<button>Modifier votre mot de passe</button>
-				<button>Afficher vos commentaires</button>
+				<a href="{{ path('app_profilUser')}}">Modifier vos informations</a>
+				<a href="{{ path('app_modifyPassword')}}" >Modifier votre mot de passe</a>
+				<a href="#listeCom">Afficher vos commentaires</a>
 			</div>
 		</div>
 
@@ -64,7 +64,7 @@
 			</div>
 		</div>
 
-		<div class="dfull fdc gap">
+		<div class="dfull fdc gap" id="listeCom">
 			<h2 class="ta">Liste des vos commentaires</h2>
 			<div class="dfull gap fw">
 			{% for comment in app.user.comments %}

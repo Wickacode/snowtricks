@@ -7,29 +7,48 @@ section#form-container {
   margin: 20px auto;
 }
 
-section#form-container div img {
+section#form-container img {
   width: 500px;
-  height: 600px;
+}
+
+section#form-container .main-img {
+  width: 250px;
+  height: 300px;
   object-fit: cover;
-  border-radius: 5px 0 0 5px;
+  margin-bottom: 20px;
+}
+
+.more-img {
+  width: 150px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.more-img-container a {
+  margin-bottom: 20px;
+}
+.more-img-container i {
+  font-size: 10px;
 }
 
 section#form-container form {
-  width: 400px;
+  width: auto;
   height: auto;
   padding: 20px;
 }
 
-form#form h2 {
-  margin-bottom: 20px;
+div#form h2 {
+  margin: 40px;
 }
 
-.formInput {
+.formInput, #tricks_form_categories {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  margin: 10px 0;
+  margin-bottom: 25px;
   box-shadow: 0 0 5px var(--extra-light-blue);
+  width: 70%;
 
 }
 

@@ -32,10 +32,14 @@ class UsersController extends AbstractController
     }
 
     #[Route('/user/profil', name: 'app_profilUser')]
-    public function profilUser(): Response
+    public function profilUser(Request $request): Response
     {
-        return $this->render('users/profil-user.html.twig', [
+        $user = $this->getUser();
+        $form = $this->createForm(UserUpdateDataFormType::class, $user);
+        $form->handleRequest($request);
+        return $this->render('users/modify-profil.html.twig', [
             'controller_name' => 'UsersController',
+            'formUpdateUser' => $form->createView(),
         ]);
     }
 
