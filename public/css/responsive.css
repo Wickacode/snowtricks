@@ -1,0 +1,93 @@
+@media (min-width: 320px) and (max-width: 768px) {
+
+    section#home-intro div.intro-text {
+        width: 100%;
+        padding: 0;
+    }
+    div#intro-container div.intro-text h1, div#intro-container div.intro-text span {
+        font-size: 1.5em !important;
+    }
+    .intro-content {
+        flex-direction: column;
+    }
+
+    .w70 {
+        width: 100%;
+        padding: 0 10px;
+
+    }
+
+    section#single-trick-page div.single-trick div.img-container h1 {
+        font-size: 7em;
+    }
+
+    section#single-trick-page div.trick-details {
+        flex-direction: column;
+        padding: 20px 0;
+        gap: 10px;
+    }
+
+    section#single-trick-page div.single-trick div.img-container {
+        height: auto;
+    }
+    .img-container {
+        flex-direction: column;
+    }
+
+    div.gallery-img-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    div.video-details-container {
+        flex-direction: column;
+    }
+
+    div.gallery-video-container iframe {
+        width: 100%;
+    }
+
+    section#add-comment-section h3 {
+        font-size: 1.5em;
+    }
+
+    section#add-comment-section div.comment-section textarea {
+        width: 100%;
+    }
+
+    section#add-comment-section div.comments-list {
+        width: 100%;
+        padding: 0;
+    }
+    section#add-comment-section div.comments-list .comment {
+        flex-direction: column;
+        width: 90%;
+        padding: 10px;
+    }
+
+    div.pagination {
+        margin-top: 20px;
+    }
+
+    /* Page connexion */
+    section#form-container {
+        width: 90%;
+    }
+   #form {
+        gap: 2rem;
+    }
+
+    #form input {
+        width: 100%;
+    }
+
+    /* Page user */
+    section#espace-user {
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      section#assets-user div.trick-user {
+        align-items: start;
+      }
+}

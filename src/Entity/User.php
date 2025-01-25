@@ -14,13 +14,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email', groups: ['registration'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
+
     #[ORM\Column(length: 255)]
     private ?string $username = null;
 
@@ -48,8 +49,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $dateUpdateUser = null;
 
-    #[ORM\Column(length: 250, nullable: true)]
-    private ?string $tokenNewPassUser = null;
+    #[ORM\Column(length: 64, nullable: true)]
+    private ?string $resetToken = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $resetTokenExpiresAt = null;
 
     /**
      * @Assert\EqualTo(
@@ -57,11 +61,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *      message = "Le mot de passe n'est pas identique."
      * )
      */
-    private $passwordConfirm;
+    private ?string $passwordConfirm = null;
+
     #[ORM\Column]
     private ?bool $isVerified = null;
-
-    private \DateTimeInterface $tokenExpiration;
 
     /**
      * @var Collection<int, Tricks>
@@ -81,6 +84,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->comments = new ArrayCollection();
     }
 
+    // Getters and setters...
+
     public function getId(): ?int
     {
         return $this->id;
@@ -98,38 +103,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
 
-    /**
-     * @see UserInterface
-     *
-     * @return list<string>
-     */
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
-    public function isAdmin(): bool
-    {
-        return in_array('ROLE_ADMIN', $this->getRoles());
-    }
-
-    /**
-     * @param list<string> $roles
-     */
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
@@ -137,9 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
     public function getPassword(): ?string
     {
         return $this->password;
@@ -152,13 +135,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // Clear sensitive data if necessary
     }
 
     public function getAvatar(): ?string
@@ -197,88 +176,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTokenNewPassUser(): ?string
+    public function getResetToken(): ?string
     {
-        return $this->tokenNewPassUser;
+        return $this->resetToken;
     }
 
-    public function setTokenNewPassUser(?string $tokenNewPassUser): static
+    public function setResetToken(?string $resetToken): static
     {
-        $this->tokenNewPassUser = $tokenNewPassUser;
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+    public function getResetTokenExpiresAt(): ?\DateTimeInterface
+    {
+        return $this->resetTokenExpiresAt;
+    }
+
+    public function setResetTokenExpiresAt(?\DateTimeInterface $resetTokenExpiresAt): static
+    {
+        $this->resetTokenExpiresAt = $resetTokenExpiresAt;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Tricks>
+     * Check if the reset token is still valid.
      */
-    public function getTricks(): Collection
+    public function isResetTokenValid(): bool
     {
-        return $this->tricks;
-    }
-
-    public function addTrick(Tricks $trick): static
-    {
-        if (!$this->tricks->contains($trick)) {
-            $this->tricks->add($trick);
-            $trick->setUsers($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrick(Tricks $trick): static
-    {
-        if ($this->tricks->removeElement($trick)) {
-            // set the owning side to null (unless already changed)
-            if ($trick->getUsers() === $this) {
-                $trick->setUsers(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Comments>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function addComment(Comments $comment): static
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-            $comment->setUsers($this);
-        }
-
-        return $this;
-    }
-
-    public function removeComment(Comments $comment): static
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getUsers() === $this) {
-                $comment->setUsers(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
+        return $this->resetTokenExpiresAt !== null && $this->resetTokenExpiresAt > new \DateTime();
     }
 
     public function getPasswordConfirm(): ?string
@@ -305,16 +232,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-    public function getTokenExpiration(): \DateTimeInterface
+    public function getTricks(): Collection
     {
-        return $this->tokenExpiration;
+        return $this->tricks;
     }
 
-    public function setTokenExpiration(\DateTimeInterface $tokenExpiration): self
+    public function addTrick(Tricks $trick): static
     {
-        $this->tokenExpiration = $tokenExpiration;
+        if (!$this->tricks->contains($trick)) {
+            $this->tricks->add($trick);
+            $trick->setUsers($this);
+        }
+
         return $this;
     }
 
+    public function removeTrick(Tricks $trick): static
+    {
+        if ($this->tricks->removeElement($trick) && $trick->getUsers() === $this) {
+            $trick->setUsers(null);
+        }
+
+        return $this;
+    }
+
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): static
+    {
+        if ($this->comments->removeElement($comment) && $comment->getUsers() === $this) {
+            $comment->setUsers(null);
+        }
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
 }

@@ -1,5 +1,6 @@
 section#form-page {
   min-height: 100vh;
+  flex-direction: column;
 }
 section#form-container {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -84,7 +85,7 @@ form#form button.submit-button:active {
 .alert{
   text-align: center;
   padding: 15px;
-  color: white;
+  color: rgb(167, 42, 42);
   border-radius: 4px;
 }
 

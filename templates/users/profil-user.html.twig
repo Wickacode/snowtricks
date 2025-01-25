@@ -5,10 +5,16 @@
 
 {% block body %}
 
+	{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 	<section id="espace-user" class="dfull gap">
 		<div class="info-user">
-			<div class="dfull fdc">
-				<span>
+			<div class="dfull fdc gap">
+				<span class="username">
 					{{ app.user.username }}
 				</span>
 
@@ -30,16 +36,20 @@
 		<div class="dfull fdc gap">
 			<h2>Modifier votre compte</h2>
 			<div class="dfull fdc gap user-page-options">
-				<a href="{{ path('app_profilUser')}}">Modifier vos informations</a>
+				<a href="{{ path('app_updateUser')}}">Modifier vos informations</a>
 				<a href="{{ path('app_modifyPassword')}}" >Modifier votre mot de passe</a>
 				<a href="#listeCom">Afficher vos commentaires</a>
 			</div>
 		</div>
 
 	</section>
-	<section class="dfull gap fdc">
+	<section id="assets-user" class="dfull gap fdc">
 		<div class="dfull fdc gap">
 			<h2 class="ta">Liste des tricks crées</h2>
+			{% if app.user.tricks | length == 0 %}
+			<p>Vous n'avez pas encore créé de Tricks</p>
+			{% else %}
+			
 			<div class="user-trick-container dfull gap">
 				{% for trick in app.user.tricks %}
 					<div class="trick-user dfull fdc gap">
@@ -62,10 +72,14 @@
 					</div>
 				{% endfor %}
 			</div>
+			{% endif %}
 		</div>
 
 		<div class="dfull fdc gap" id="listeCom">
 			<h2 class="ta">Liste des vos commentaires</h2>
+			{% if app.user.comments | length == 0 %}
+			<p>Vous n'avez pas encore ajouté de commentaire</p>
+			{% else %}
 			<div class="dfull gap fw">
 			{% for comment in app.user.comments %}
 				<div class="comment-user">
@@ -80,6 +94,7 @@
 				</div>
 			{% endfor %}
 			</div>
+			{% endif %}
 		</div>
 
 	</div>

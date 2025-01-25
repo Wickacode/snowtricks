@@ -86,6 +86,10 @@ a {
   height: 100vh;
 }
 
+.alert {
+  margin: 20px;
+}
+
 /* Icones  */
 i {
   cursor: pointer;
@@ -120,7 +124,6 @@ i.fa-trash:hover {
   box-shadow: 3px 3px 7px #444444;
   -webkit-box-shadow: 3px 3px 7px #444444;
   -moz-box-shadow: 3px 3px 7px #444444;
-  width: 150px;
 }
 
 .submit-btn:hover {
@@ -292,18 +295,31 @@ section.trick {
 /* User page */
 
 section#espace-user {
-  height: 70vh;
+  height: 60vh;
+  background-color: var(--extra-light-blue);
+}
+
+section#assets-user {
+  padding: 50px 0;
 }
 
 .info-user {
 background-color: #444444;
 color: #ffffff;
 padding: 20px;
+border-radius: 10px;
+width: 400px;
+}
+
+.info-user .username {
+  font-size: 1.5em;
 }
 
 .info-user img {
-  width: 300px;
-  height: 300px;
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 .user-trick-container {
   flex-wrap: wrap;
@@ -311,28 +327,31 @@ padding: 20px;
   margin: auto;
 }
 
-.user-page-options button {
+.user-page-options > a {
+  text-align: center;
  padding: 10px;
  border: none;
  background-color: #bbe4e9;
+ border: 2px solid var(--dark-blue);
  border-radius: 15px;
  width: 230px;
  cursor: pointer;
 }
 
-.user-page-options button:hover {
+.user-page-options >a:hover {
   background-color: var(--light-blue);
   font-weight: bold;
  }
 
 .trick-user, .comment-user {
   border-radius: 10px;
-  background-color: var(--extra-dark-blue);
+  background-color: var(--dark-blue);
   padding: 10px;
   color: var(--extra-light-blue);
+  width: 350px;
 }
 .trick-user .user-trick-img img {
-  width: 100%;
+  width: 320px;
   height: 250px;
   object-fit: cover;
 }

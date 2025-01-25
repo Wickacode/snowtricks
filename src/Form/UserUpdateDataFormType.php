@@ -30,6 +30,7 @@ class UserUpdateDataFormType extends AbstractType
 
             ->add('avatar', FileType::class, array(
                 'data_class' => null,
+                'mapped' => false,
                 'required' => false,
                 'attr' => array(
                     'class' => 'avatar',
