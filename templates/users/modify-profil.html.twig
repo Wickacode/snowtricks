@@ -6,12 +6,7 @@
 {% block body %}
 
 	<section id="form-page" class="dfull">
-
 		<section id="form-container" class="dfull">
-			<div>
-				<img src="{{ asset('img/bg-blur.png')}}" / alt="image">
-			</div>
-
 			{{ form_start(formUpdateUser) }}
 			<div id="form" class="dfull fdc">
 				<h2>Gérer votre compte</h2>
@@ -23,13 +18,11 @@
 				{{ form_widget(formUpdateUser.email) }}
 				{{ form_errors(formUpdateUser.email) }}
 
-
 				<label for="avatar" class="dfull fdc">Modifier votre avatar</label><br/>
 				{{ form_widget(formUpdateUser.avatar) }}
 				{{ form_errors(formUpdateUser.avatar) }}
 
-				<button type="submit" class="submit-btn">Valider les modifications</button>
-
+				<button type="submit" class="submit-button">Valider les modifications</button>
 			</div>
 			{{ form_end(formUpdateUser) }}
 		</section>

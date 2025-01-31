@@ -31,7 +31,7 @@
 
 		</section>
 
-		<section id="home-tricks-list" class="dfull fdc">
+		<section id="home-tricks-list" class="dfull fdc ">
 			<h2>Tricks</h2>
 			<section id="home-tricks-container" class="dfull fw gap w70">
 				{% for trick in tricks %}
@@ -58,8 +58,8 @@
 		</section>
 		{% if tricks | length > 10 %}
 			<div class="dfull">
-				<button id="loadMoreTrick" type="submit" name="loadNextTrick" class="submit-btn">Voir +</button>
-				<button id="loadLessTrick" type="submit" name="loadNextTrick" class="submit-btn">Voir -</button>
+				<button id="loadMoreTrick" type="submit" name="loadNextTrick" class="submit-button">Voir +</button>
+				<button id="loadLessTrick" type="submit" name="loadNextTrick" class="submit-button">Voir -</button>
 			</div>
 		{% endif %}
 

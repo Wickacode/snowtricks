@@ -1,15 +1,11 @@
 section#form-page {
-  min-height: 100vh;
+  min-height: auto;
   flex-direction: column;
+  margin: 50px auto;
 }
 section#form-container {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  width: auto;
-  margin: 20px auto;
-}
-
-section#form-container img {
-  width: 500px;
+  padding: 0 50px;
 }
 
 section#form-container .main-img {
@@ -34,55 +30,63 @@ section#form-container .main-img {
 }
 
 section#form-container form {
-  width: auto;
-  height: auto;
-  padding: 20px;
+  padding: 20px 0;
 }
 
-div#form h2 {
-  margin: 40px;
-}
-
-.formInput, #tricks_form_categories {
+section#form-container form input:not(#registration_form_agreeTerms) {
+  width: 100%;
   padding: 10px;
   border: none;
   border-radius: 5px;
   margin-bottom: 25px;
   box-shadow: 0 0 5px var(--extra-light-blue);
-  width: 70%;
-
 }
 
-form#form input::placeholder {
-    color: var(--extra-dark-blue);
+section#form-container form h1 {
+  font-size: 2rem;
+  margin: 40px;
 }
 
-form#form input:focus {
+section#form-container .login-link,
+.forgot-password {
+  margin: 20px auto;
+}
+
+section#form-container form input::placeholder {
+  color: var(--extra-dark-blue);
+}
+
+section#form-container form input:focus {
   border-color: var(--dark-blue);
   outline: none;
   box-shadow: 0 0 5px var(--extra-dark-blue);
 }
 
-form#form button.submit-button {
+/* Submit btn */
+.submit-button {
   background: var(--light-blue);
   border: none;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   color: #ffffff;
   cursor: pointer;
-  padding: 14px;
+  padding: 10px 15px;
   margin: 20px 0;
 }
-
-form#form button.submit-button:hover,
-form#form button.submit-button:active {
+.submit-button:hover {
+  box-shadow: 1px 1px 4px #777777;
+  -webkit-box-shadow: 1px 1px 4px #777777;
+  -moz-box-shadow: 1px 1px 4px #777777;
+}
+.submit-button:hover,
+.submit-button:active {
   background-color: initial;
   color: var(--dark-blue);
 }
 
 /* Messages après soumission */
 
-.alert{
+.alert {
   text-align: center;
   padding: 15px;
   color: rgb(167, 42, 42);
@@ -91,21 +95,24 @@ form#form button.submit-button:active {
 
 .alert-success {
   background-color: #5aae5a;
+  background-color: #5aae5a;
+    color: white;
+    width: 50%;
+    margin: 20px auto;
 }
 
 /* Responsive  */
 
 @media (max-width: 768px) {
+  section#form-page {
+    height: auto;
+  }
+  section#form-container div img {
+    display: none;
+  }
 
-    section#form-page {
-        height: auto;
-    }
-    section#form-container div img {
-        display: none;
-    }
-
-    section#form-container form#form {
-        height: auto;
-        padding: 25px;
-    }
+  section#form-container form#form {
+    height: auto;
+    padding: 25px;
+  }
 }

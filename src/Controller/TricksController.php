@@ -21,7 +21,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TricksController extends AbstractController
 {
-    #[Route('/trick/{slug}', name: 'app_trick', requirements: ['slug' => '[a-z0-9\-]+'], priority: -1)]
+    #[Route('/trick/{slug}', name: 'app_trick', requirements: ['slug' => '[a-zA-Z0-9\-]+'], priority: -1)]
 
     public function showTrick(
         $slug,

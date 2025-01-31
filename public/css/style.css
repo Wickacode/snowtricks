@@ -107,29 +107,8 @@ i.fa-trash:hover {
   width: 70%;
 }
 
-/* Submit btn */
-.submit-btn {
-  cursor: pointer;
-  text-decoration: none;
-  padding: 10px;
-  font-family: arial;
-  font-size: 1em;
-  font-weight: bold;
-  color: var(--extra-dark-blue);
-  background-color: var(--extra-light-blue);
-  border-radius: 24px;
-  -webkit-border-radius: 24px;
-  -moz-border-radius: 24px;
-  border: 4px solid #ffffff;
-  box-shadow: 3px 3px 7px #444444;
-  -webkit-box-shadow: 3px 3px 7px #444444;
-  -moz-box-shadow: 3px 3px 7px #444444;
-}
-
-.submit-btn:hover {
-  box-shadow: 1px 1px 4px #777777;
-  -webkit-box-shadow: 1px 1px 4px #777777;
-  -moz-box-shadow: 1px 1px 4px #777777;
+.h60 {
+  min-height: 70vh;
 }
 
 .btnValidate {
@@ -140,7 +119,7 @@ i.fa-trash:hover {
 }
 
 /* Home Page */
- 
+
 section#home-intro {
   position: relative;
   background-image: url("./../img/bg-banner.jpg");
@@ -190,7 +169,8 @@ section#home-intro div.bottom-nav i.fa-angles-down {
   animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
-#loadMoreTrick, #loadLessTrick {
+#loadMoreTrick,
+#loadLessTrick {
   margin-top: 20px;
   font-weight: bold;
   cursor: pointer;
@@ -243,14 +223,14 @@ section#home-tricks-list h2 {
   font-size: 2.5em;
 }
 
-section#home-tricks-list div.home-trick {
+div.home-trick {
   position: relative;
   width: min-content;
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-section#home-tricks-list div.home-trick .home-trick-img img {
+.home-trick-img img {
   width: 300px;
   height: 320px;
   object-fit: cover;
@@ -259,11 +239,11 @@ section#home-tricks-list div.home-trick .home-trick-img img {
   transition: filter 0.2s ease-in-out; /* Animation fluide */
 }
 
-section#home-tricks-list div.home-trick:hover .home-trick-img img {
+.home-trick-img img {
   filter: brightness(100%) drop-shadow(0 0 0 rgba(0, 0, 0, 0));
 }
 
-section#home-tricks-list div.home-trick div.home-trick-name {
+div.home-trick div.home-trick-name {
   color: var(--extra-dark-blue);
   text-transform: uppercase;
   text-align: center;
@@ -296,7 +276,6 @@ section.trick {
 
 section#espace-user {
   height: 60vh;
-  background-color: var(--extra-light-blue);
 }
 
 section#assets-user {
@@ -304,11 +283,11 @@ section#assets-user {
 }
 
 .info-user {
-background-color: #444444;
-color: #ffffff;
-padding: 20px;
-border-radius: 10px;
-width: 400px;
+  background-color: #444444;
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
 }
 
 .info-user .username {
@@ -327,34 +306,17 @@ width: 400px;
   margin: auto;
 }
 
-.user-page-options > a {
+.user-trick-container .home-trick {
   text-align: center;
- padding: 10px;
- border: none;
- background-color: #bbe4e9;
- border: 2px solid var(--dark-blue);
- border-radius: 15px;
- width: 230px;
- cursor: pointer;
 }
 
-.user-page-options >a:hover {
-  background-color: var(--light-blue);
-  font-weight: bold;
- }
+.user-page-options {
+  align-items: start !important;
+}
+.user-page-options .submit-button {
+  margin: 0;
+}
 
-.trick-user, .comment-user {
-  border-radius: 10px;
-  background-color: var(--dark-blue);
-  padding: 10px;
-  color: var(--extra-light-blue);
-  width: 350px;
-}
-.trick-user .user-trick-img img {
-  width: 320px;
-  height: 250px;
-  object-fit: cover;
-}
 .comment-user {
   width: 20%;
 }
