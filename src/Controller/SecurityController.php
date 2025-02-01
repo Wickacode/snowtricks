@@ -42,7 +42,6 @@ class SecurityController extends AbstractController
         $form = $this->createForm(ForgotPasswordFormType::class);
         $form->handleRequest($request);
     
-        // Vérifiez si le formulaire a été soumis avant d'effectuer une validation
         if ($form->isSubmitted()) {
             dump($request->get('email'), $form->isSubmitted(), $form->isValid());
     
