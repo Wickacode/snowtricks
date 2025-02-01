@@ -21,7 +21,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class TricksController extends AbstractController
 {
-    #[Route('/trick/{slug}', name: 'app_trick', requirements: ['slug' => '[a-zA-Z0-9\-]+'], priority: -1)]
+    #[Route('/trick/{slug}', name: 'app_trick', requirements: ['slug' => '[a-zA-Z0-9\-]+'], priority: -1, methods: ['GET', 'POST'])]
 
     public function showTrick(
         $slug,
@@ -91,7 +91,7 @@ class TricksController extends AbstractController
     }
 
 
-    #[Route('/trick/addTrick', name: 'app_newTrick')]
+    #[Route('/trick/addTrick', name: 'app_newTrick', methods: ['GET', 'POST'])]
     public function addTrick(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response
     {
         $trick = new Tricks();
@@ -165,7 +165,7 @@ class TricksController extends AbstractController
         ]);
     }
 
-    #[Route('/trick/updateTrick/{slug}', name: 'app_updateTrick')]
+    #[Route('/trick/updateTrick/{slug}', name: 'app_updateTrick', methods: ['GET', 'POST'])]
     public function updateTrick($slug, Request $request, TricksRepository $tricksRepository, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $trick = $tricksRepository->findOneBy(['slug' => $slug]);
@@ -249,7 +249,7 @@ class TricksController extends AbstractController
         ]);
     }
 
-    #[Route('/deleteImg/{slug}/{id}', name: 'app_deleteImg')]
+    #[Route('/deleteImg/{slug}/{id}', name: 'app_deleteImg', methods: ['GET', 'DELETE'])]
     public function deleteImg($slug, $id, Request $request, TricksRepository $tricksRepository, MediasRepository $mediasRepository): Response
     {
 
@@ -264,7 +264,7 @@ class TricksController extends AbstractController
 
     }
 
-    #[Route('/deleteVideo/{slug}/{id}', name: 'app_deleteVideo')]
+    #[Route('/deleteVideo/{slug}/{id}', name: 'app_deleteVideo', methods: ['GET', 'DELETE'])]
     public function deleteVideo($slug, $id, Request $request, TricksRepository $tricksRepository, MediasRepository $mediasRepository): Response
     {
 
@@ -277,7 +277,7 @@ class TricksController extends AbstractController
 
 
 
-    #[Route('/deleteTrick/{slug}', name: 'app_deleteTrick')]
+    #[Route('/deleteTrick/{slug}', name: 'app_deleteTrick', methods: ['GET', 'DELETE'])]
     public function deleteTrick($slug, Request $request, TricksRepository $tricksRepository): Response
     {
         $trick = $tricksRepository->findOneBy(['slug' => $slug]);

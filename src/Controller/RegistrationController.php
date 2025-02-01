@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
     {
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/register', name: 'app_register', methods:["POST"])]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -68,13 +68,13 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/register/success', name: 'app_success_register')]
+    #[Route('/register/success', name: 'app_success_register', methods:["GET"])]
     public function successRegister() {
         return $this->render('registration/successRegister.html.twig');
     }
 
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verify/email', name: 'app_verify_email', methods:["GET"])]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');

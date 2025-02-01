@@ -15,7 +15,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class UsersController extends AbstractController
 {
-    #[Route('/user/profile', name: 'app_profilUser')]
+    #[Route('/user/profile', name: 'app_profilUser', methods: ['GET'])]
     public function profileUser(): Response
     {
         return $this->render('users/profil-user.html.twig', [
@@ -23,7 +23,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/user/updateUser', name: 'app_updateUser')]
+    #[Route('/user/updateUser', name: 'app_updateUser', methods: ['GET', 'POST'])]
     public function updateUser(Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $user = $this->getUser();
@@ -77,7 +77,7 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/user/modifyPassword', name: 'app_modifyPassword')]
+    #[Route('/user/modifyPassword', name: 'app_modifyPassword', methods: ['GET', 'POST'])]
     public function modifyPassword(
         Request $request,
         UserPasswordHasherInterface $passwordHasher,

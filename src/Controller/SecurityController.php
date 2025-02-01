@@ -18,7 +18,8 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 class SecurityController extends AbstractController
 {
-    #[Route(path: '/login', name: 'app_login')]
+    // Route pour la connexion (méthode POST)
+    #[Route(path: '/login', name: 'app_login', methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -30,13 +31,15 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/logout', name: 'app_logout')]
+    // Route pour la déconnexion (méthode POST par défaut)
+    #[Route(path: '/logout', name: 'app_logout', methods: ['GET'])]
     public function logout(): void
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route('/forgot-password', name: 'app_forgot_password')]
+    // Route pour le formulaire de demande de réinitialisation de mot de passe (méthode GET et POST)
+    #[Route('/forgot-password', name: 'app_forgot_password', methods: ['GET', 'POST'])]
     public function forgotPassword(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer): Response
     {
         $form = $this->createForm(ForgotPasswordFormType::class);
@@ -59,7 +62,7 @@ class SecurityController extends AbstractController
                         ->from('no-reply@votre-domaine.com')
                         ->to($email)
                         ->subject('Réinitialisation de votre mot de passe')
-                        ->htmlTemplate('security/resetPasswordEmail.html.twig')  // Mise à jour du chemin ici
+                        ->htmlTemplate('security/resetPasswordEmail.html.twig')
                         ->context([
                             'resetToken' => $resetToken,
                             'expiration' => $expiration
@@ -83,61 +86,60 @@ class SecurityController extends AbstractController
     }
     
 
-    #[Route('/reset-password/{token}', name: 'app_reset_password')]
-public function resetPassword(
-    string $token,
-    Request $request,
-    EntityManagerInterface $entityManager,
-    UserPasswordHasherInterface $passwordHasher
+    // Route pour réinitialiser le mot de passe (méthode GET et POST)
+    #[Route('/reset-password/{token}', name: 'app_reset_password', methods: ['GET', 'POST'])]
+    public function resetPassword(
+        string $token,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        UserPasswordHasherInterface $passwordHasher
     ): Response {
-    // Trouver l'utilisateur avec le token
-    $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
+        // Trouver l'utilisateur avec le token
+        $user = $entityManager->getRepository(User::class)->findOneBy(['resetToken' => $token]);
 
-    // Si l'utilisateur n'existe pas ou le token est invalide
-    if (!$user || !$user->isResetTokenValid()) {
-        $this->addFlash('error', 'Le lien est invalide ou a expiré.');
-        return $this->redirectToRoute('app_forgot_password');
-    }
-
-    // Création du formulaire de réinitialisation du mot de passe
-    $form = $this->createForm(ResetPasswordFormType::class);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        // Récupérer le mot de passe
-        $newPassword = $form->get('password')->getData();
-        $confirmPassword = $form->get('confirmPassword')->getData();
-
-        // Vérifiez si les mots de passe correspondent
-        if ($newPassword !== $confirmPassword) {
-            $this->addFlash('danger', 'Les mots de passe ne correspondent pas.');
-            return $this->redirectToRoute('app_reset_password', ['token' => $token]);
+        // Si l'utilisateur n'existe pas ou le token est invalide
+        if (!$user || !$user->isResetTokenValid()) {
+            $this->addFlash('error', 'Le lien est invalide ou a expiré.');
+            return $this->redirectToRoute('app_forgot_password');
         }
 
-        // Hacher le mot de passe et l'enregistrer
-$hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
-        $user->setPassword($hashedPassword);
+        // Création du formulaire de réinitialisation du mot de passe
+        $form = $this->createForm(ResetPasswordFormType::class);
+        $form->handleRequest($request);
 
-        // Supprimer les informations de réinitialisation du mot de passe
-        $user->setResetToken(null);
-        $user->setResetTokenExpiresAt(null);
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer le mot de passe
+            $newPassword = $form->get('password')->getData();
+            $confirmPassword = $form->get('confirmPassword')->getData();
 
-        // Sauvegarder les changements
-        $entityManager->flush();
+            // Vérifiez si les mots de passe correspondent
+            if ($newPassword !== $confirmPassword) {
+                $this->addFlash('danger', 'Les mots de passe ne correspondent pas.');
+                return $this->redirectToRoute('app_reset_password', ['token' => $token]);
+            }
 
-        // Message de succès
-        $this->addFlash('success', 'Votre mot de passe a été mis à jour.');
+            // Hacher le mot de passe et l'enregistrer
+            $hashedPassword = $passwordHasher->hashPassword($user, $newPassword);
+            $user->setPassword($hashedPassword);
 
-        // Rediriger vers la page de connexion
-        return $this->redirectToRoute('app_login');
+            // Supprimer les informations de réinitialisation du mot de passe
+            $user->setResetToken(null);
+            $user->setResetTokenExpiresAt(null);
+
+            // Sauvegarder les changements
+            $entityManager->flush();
+
+            // Message de succès
+            $this->addFlash('success', 'Votre mot de passe a été mis à jour.');
+
+            // Rediriger vers la page de connexion
+            return $this->redirectToRoute('app_login');
+        }
+
+        // Retourner le formulaire
+        return $this->render('security/resetPassword.html.twig', [
+            'resetPasswordForm' => $form, // Assurez-vous de passer form ici
+            'token' => $token,
+        ]);
     }
-
-    // Retourner le formulaire
-    return $this->render('security/resetPassword.html.twig', [
-        'resetPasswordForm' => $form, // Assurez-vous de passer form ici
-        'token' => $token,
-    ]);
-}
-
-    
 }
