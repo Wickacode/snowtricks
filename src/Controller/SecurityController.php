@@ -43,8 +43,6 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted()) {
-            dump($request->get('email'), $form->isSubmitted(), $form->isValid());
-    
             if ($form->isValid()) {
                 $email = $form->get('email')->getData();
                 $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
