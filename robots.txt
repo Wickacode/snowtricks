@@ -1,0 +1,20 @@
+User-agent: *
+Disallow: /admin
+Disallow: /config
+Disallow: /var
+Disallow: /vendor
+Disallow: /node_modules
+Disallow: /private
+Disallow: /tests
+
+# Optionnel : Empêcher l'indexation des URLs avec des paramètres Symfony
+Disallow: /*?*
+
+# Permettre l'indexation des ressources publiques
+Allow: /uploads
+Allow: /assets
+Allow: /css
+Allow: /js
+Allow: /images
+
+Sitemap: https://www.example.com/sitemap.xml
