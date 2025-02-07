@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home', methods:["GET"])]
+    #[Route('/home', name: 'app_home', methods: ['GET'])]
     public function index(TricksRepository $trickRepository ): Response
     {
         $tricks = $trickRepository->findAll();

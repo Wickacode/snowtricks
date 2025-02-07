@@ -1,9 +1,6 @@
 section#single-trick-page div.single-trick {
   width: 100%;
 }
-section#single-trick-page div.single-trick div.img-container {
-  height: 80vh;
-}
 
 section#single-trick-page div.single-trick div.img-container h1 {
   font-size: 12em;
@@ -34,8 +31,8 @@ section#single-trick-page div.single-trick div.img-container h1 {
 
 section#single-trick-page div.single-trick .main-img {
   width: 100%;
-  height: 80vh;
   object-fit: cover;
+  height: 60%;
 }
 
 section#single-trick-page div.trick-details {
@@ -44,12 +41,12 @@ section#single-trick-page div.trick-details {
   margin: auto;
   font-weight: 600;
   color: var(--extra-light-blue);
+  z-index: 999;
 }
 
 section#single-trick-page div.single-trick div.others-medias {
   margin: 20px auto;
   overflow: hidden;
-  width: 98vw;
 }
 
 section#single-trick-page div.single-trick div.others-medias img {

@@ -56,7 +56,7 @@ navLinks.classList.toggle('active');
 					<!-- Icône du menu hamburger -->
 				</button>
 
-				<ul>
+				<ul class="desktop-menu">
 					<li>
 						<a href="{{path('app_home')}}">Accueil</a>
 					</li>
@@ -85,6 +85,34 @@ navLinks.classList.toggle('active');
 				</ul>
 			</nav>
 		</header>
+
+		<ul class="mobile-menu">
+			<li>
+				<a href="{{path('app_home')}}"><i class="fa-solid fa-house"></i></a>
+			</li>
+			{% if app.user %}
+				<li>
+					<a href="{{path('app_profilUser')}}"><i class="fa-regular fa-user"></i></a>
+				</li>
+				<li>
+					<a href="{{path('app_newTrick')}}"><i class="fa-solid fa-plus"></i></a>
+				</li>
+				<li>
+					<a href="{{path('app_logout')}}"><i class="fa-solid fa-right-from-bracket"></i></a>
+				</li>
+
+			{% else %}
+
+				<li>
+					<a href="{{path('app_login')}}"><i class="fa-solid fa-right-to-bracket"></i></a>
+				</li>
+				<li>
+					<a href="{{path('app_register')}}"><i class="fa-solid fa-user-plus"></i></a>
+				</li>
+
+			{% endif %}
+
+		</ul>
 
 		{% block body %}{% endblock %}
 
