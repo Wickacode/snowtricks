@@ -2,9 +2,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<h1>Accès non autorisé</h1>
-	<p>
-		Vous n'avez pas accès à cette page
+	<section id="errorPage">
+		<h1>Accès non autorisé</h1>
+		<p>
+			Vous n'avez pas accès à cette page
+		</p>
 		<a href="{{ path('app_home') }}">retourner à l'accueil</a>.
-	</p>
+
+	</section>
 {% endblock %}

@@ -72,12 +72,17 @@
     margin-top: 20px;
   }
 
+  section#form-container form h1 {
+    margin: 0;
+    text-align: center;
+  }
+
   /* Page connexion */
   section#form-container {
     width: 90%;
   }
   #form {
-    gap: 2rem;
+    gap: 10px;
   }
 
   #form input {
@@ -87,10 +92,20 @@
   /* Page user */
   section#espace-user {
     flex-direction: column;
-    height: 100vh;
+    justify-content: start;
+    height: 85vh;
   }
 
   section#assets-user div.trick-user {
     align-items: start;
+  }
+
+  .comment-user {
+    width: 90%;
+  }
+
+  /* error page */
+  section#errorPage {
+    text-align: center;
   }
 }

@@ -1,11 +1,11 @@
- {# templates/bundles/TwigBundle/Exception/error500.html.twig #}
+{# templates/bundles/TwigBundle/Exception/error500.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block body %}
- <div class="">
-    <h1>500</h1>
-    <p>Oops ! Une erreur interne du serveur est survenue.</p>
-    <p>Nous travaillons pour résoudre le problème le plus rapidement possible.</p>
-    <a href="/" class="">Retour à l'accueil</a>
-  </div>
-{% endblock %}
+	<section id="errorPage">
+		<h1>Erreur 500</h1>
+		<p>Oops ! Une erreur interne du serveur est survenue.</p>
+		<p>Nous travaillons pour résoudre le problème le plus rapidement possible.</p>
+		<a href="/" class="">Retour à l'accueil</a>
+	</div>
+</section>{% endblock %}
