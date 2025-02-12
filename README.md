@@ -2,6 +2,13 @@
 
 Projet réalisé dans le cadre de la formation **Développeur d'application PHP/Symfony** sur OpenClassrooms.
 
+# Mon Projet
+
+[![SymfonyInsight](https://insight.symfony.com/projects/045caa3f-e39f-4447-b490-c9523b289f85/big.svg)](https://insight.symfony.com/projects/045caa3f-e39f-4447-b490-c9523b289f85)
+
+Ce projet a obtenu **3 étoiles** sur [Symfony Insight](https://insight.symfony.com/).
+
+
 ---
 
 ## 📌 Informations Générales
