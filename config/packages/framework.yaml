@@ -4,10 +4,11 @@ framework:
     #csrf_protection: true
 
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
-
-    #esi: true
-    #fragments: true
+    session:
+        # Utiliser un nom personnalisé pour le cookie de session (autre que PHPSESSID)
+        name: MYAPPSESSID  
+        cookie_secure: auto  
+        cookie_samesite: lax 
 
 when@test:
     framework:
