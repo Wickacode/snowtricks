@@ -41,7 +41,7 @@ class RegistrationController extends AbstractController
                 ->setDateUpdateUser($dateCreate)
                 ->setVerified(false)
                 ->setRoles(["ROLE_USER"])
-                ->setTokenNewPassUser($confirmationToken);
+                ->setResetToken($confirmationToken);
             ;
 
             $entityManager->persist($user);

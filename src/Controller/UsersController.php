@@ -48,7 +48,7 @@ class UsersController extends AbstractController
 
                 try {
                     $newAvatar->move(
-                        $this->getParameter('images_directory'),
+                        $this->getParameter('avatars_directory'),
                         $avatarFilename
                     );
                 } catch (FileException $e) {
@@ -63,7 +63,7 @@ class UsersController extends AbstractController
                     $user->setAvatar(''); // Avatar par défaut ou gestion personnalisée
                 }
             }
-
+          
             $entityManager->persist($user);
             $entityManager->flush();
 
