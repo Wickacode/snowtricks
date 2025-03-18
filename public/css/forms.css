@@ -2,6 +2,7 @@ section#form-page {
   min-height: auto;
   flex-direction: column;
   margin: 50px auto;
+  height: 70vh;
 }
 section#form-container {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -96,9 +97,9 @@ section#form-container form input:focus {
 .alert-success {
   background-color: #5aae5a;
   background-color: #5aae5a;
-    color: white;
-    width: 50%;
-    margin: 20px auto;
+  color: white;
+  width: 50%;
+  margin: 20px auto;
 }
 
 /* Responsive  */
