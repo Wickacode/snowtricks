@@ -37,6 +37,8 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/deleteTrick/[aA0-zZ9\-], roles: ROLE_USER }
+        - { path: ^/trick/addTrick, roles: ROLE_USER }
+        - { path: ^/trick/updateTrick/[aA0-zZ9\-], roles: ROLE_USER }
 
 when@test:
     security:
