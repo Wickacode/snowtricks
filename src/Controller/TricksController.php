@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 
 
 class TricksController extends AbstractController
@@ -166,9 +167,15 @@ class TricksController extends AbstractController
     }
 
     #[Route('/trick/updateTrick/{slug}', name: 'app_updateTrick', methods: ['GET', 'POST'])]
-    public function updateTrick($slug, Request $request, TricksRepository $tricksRepository, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
+    public function updateTrick($slug, Request $request, TricksRepository $tricksRepository, SluggerInterface $slugger, EntityManagerInterface $entityManager, Security $security): Response
     {
+        $user = $security->getUser();
         $trick = $tricksRepository->findOneBy(['slug' => $slug]);
+
+        // Vérifier si l'utilisateur est le propriétaire ou un admin
+        if ($trick->getUsers() !== $user && !$security->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Vous n'avez pas les permissions nécessaires pour modifier cet article.");
+        }
 
         // Récupérer l'image principale actuelle
         $precedentMainImg = $trick->getMainImg();
@@ -278,9 +285,15 @@ class TricksController extends AbstractController
 
 
     #[Route('/deleteTrick/{slug}', name: 'app_deleteTrick', methods: ['GET', 'DELETE'])]
-    public function deleteTrick($slug, Request $request, TricksRepository $tricksRepository): Response
+    public function deleteTrick($slug, Request $request, TricksRepository $tricksRepository, Security $security): Response
     {
+        $user = $security->getUser();
         $trick = $tricksRepository->findOneBy(['slug' => $slug]);
+
+        // Vérifier si l'utilisateur est le propriétaire ou un admin
+        if ($trick->getUsers() !== $user && !$security->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Vous n'avez pas les permissions nécessaires pour supprimer cet article.");
+        }
 
         if (!$trick) {
             throw $this->createNotFoundException('Trick not found');
